@@ -1,6 +1,5 @@
 package com.example.hellokitty.ui.screens.auth
 
-
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.LinearEasing
@@ -60,7 +59,7 @@ fun RegisterScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .paint(painter = painterResource(R.drawable.levi), contentScale = ContentScale.FillBounds)
+            .paint(painter = painterResource(R.drawable.img_18), contentScale = ContentScale.FillBounds)
 
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
@@ -258,7 +257,7 @@ fun RegisterScreen(
             }
         }
 
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         TextButton(
             onClick = { navController.navigate(ROUT_LOGIN) }

@@ -33,6 +33,8 @@ import com.example.hellokitty.R
 import com.example.hellokitty.navigation.ROUT_ABOUT
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.navigation.ROUT_REGISTER
+import com.example.hellokitty.navigation.ROUT_SPLASH
+import com.example.hellokitty.navigation.ROUT_START
 import com.example.hellokitty.viewmodel.AuthViewModel
 
 @Composable
@@ -56,7 +58,7 @@ fun LoginScreen(
                     navController.navigate(ROUT_HOME) {
                     }
                 } else {
-                    navController.navigate(ROUT_ABOUT) {
+                    navController.navigate(ROUT_START) {
                     }
                 }
             }
@@ -68,7 +70,7 @@ fun LoginScreen(
 
     Column(
         modifier = Modifier
-            .paint(painter = painterResource(R.drawable.levi), contentScale = ContentScale.FillBounds)
+            .paint(painter = painterResource(R.drawable.img_16), contentScale = ContentScale.FillBounds)
 
             .fillMaxSize()
             .padding(20.dp),

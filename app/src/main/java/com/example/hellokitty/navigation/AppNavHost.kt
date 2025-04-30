@@ -13,13 +13,15 @@ import com.example.hellokitty.ui.screens.about.AboutScreen
 import com.example.hellokitty.ui.screens.auth.LoginScreen
 import com.example.hellokitty.ui.screens.auth.RegisterScreen
 import com.example.hellokitty.ui.screens.home.HomeScreen
+import com.example.hellokitty.ui.screens.splash.SplashScreen
+import com.example.hellokitty.ui.screens.start.StartScreen
 import com.example.hellokitty.viewmodel.AuthViewModel
 
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ROUT_LOGIN
+    startDestination: String = ROUT_SPLASH
 ) {
     val context = LocalContext.current
 
@@ -56,6 +58,15 @@ fun AppNavHost(
                     popUpTo(ROUT_LOGIN) { inclusive = true }
                 }
             }
+        }
+
+        composable(ROUT_SPLASH) {
+            SplashScreen(navController)
+        }
+
+
+        composable(ROUT_START) {
+            StartScreen(navController)
         }
 
 
