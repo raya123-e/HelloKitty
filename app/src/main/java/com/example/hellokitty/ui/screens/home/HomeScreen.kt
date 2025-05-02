@@ -27,6 +27,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -46,12 +47,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -151,7 +154,7 @@ fun HomeScreen(navController: NavController){
             Column(
                 modifier = Modifier
                     .padding(paddingValues )
-                    .verticalScroll(rememberScrollState())
+
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -163,7 +166,14 @@ fun HomeScreen(navController: NavController){
 
                 //Main Contents of the page
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Image(
+                    painter = painterResource(R.drawable.img_28),
+                    contentDescription = "anime",
+                    modifier = Modifier.fillMaxWidth().height(310.dp),
+                    contentScale = ContentScale.FillWidth
+                )
+
+                Spacer(modifier = Modifier.height(5.dp))
 
 
                 //searchbar
@@ -189,10 +199,29 @@ fun HomeScreen(navController: NavController){
 
                 //end of searchbar
 
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(5.dp))
+
 
 
                 //Main row
+
+
+                Spacer(modifier = Modifier.height(5.dp))
+
+                Text(text = "Most commonly adopted Cats",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.ExtraBold,
+                    fontFamily = FontFamily.Serif,
+                    modifier = Modifier.padding(start = 10.dp),
+                    textDecoration = TextDecoration.Underline
+
+
+                )
+
+                Spacer(modifier = Modifier.height(5.dp))
+
+
+
                 Row (
                     modifier = Modifier.fillMaxWidth()
                         .horizontalScroll(rememberScrollState())
@@ -200,14 +229,67 @@ fun HomeScreen(navController: NavController){
                 ){
 
 
+
+
                     //Card-1
                     Card(modifier = Modifier
-                        .width(100.dp)
-                        .height(200.dp)
+                        .width(200.dp)
+                        .height(300.dp)
                         .padding(start = 20.dp)
                         .clickable{navController.navigate(ROUT_ABOUT)}
-                        .clip(shape = CircleShape)
-                    ) {
+                        .clip(shape = RoundedCornerShape(10.dp)),
+                        colors = CardDefaults.cardColors(Cyan),
+
+
+                        ) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+
+                        ) {
+                            Spacer(modifier = Modifier.height(5.dp))
+
+
+                            Text(text ="Persian", fontSize = 20.sp, color = Color.Black)
+
+                            Spacer(modifier = Modifier.height(10.dp))
+
+
+                            Image(
+                                painter = painterResource(R.drawable.img_21),
+                                contentDescription = "Ecommerce",
+                                modifier = Modifier.size(400.dp).fillMaxSize().clip(CircleShape)
+                            )
+
+
+
+
+
+
+                        }
+
+
+                    }
+                    //End of Card-1
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+
+
+
+
+
+                    //Card-2
+                    Card(modifier = Modifier
+                        .width(200.dp)
+                        .height(300.dp)
+                        .padding(start = 20.dp)
+                        .clickable{navController.navigate(ROUT_ABOUT)}
+                        .clip(shape = RoundedCornerShape(10.dp)),
+                        colors = CardDefaults.cardColors(Cyan),
+
+                        ) {
                         Column(
                             modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
@@ -215,31 +297,193 @@ fun HomeScreen(navController: NavController){
 
                         ) {
 
-                            Image(
-                                painter = painterResource(R.drawable.img_21),
-                                contentDescription = "Ecommerce",
-                                modifier = Modifier.size(150.dp).fillMaxSize()
+                            Spacer(modifier = Modifier.height(5.dp))
+
+
+
+
+                            Text(text ="Ragdoll", fontSize = 20.sp, color = Color.Black
                             )
-
-
-
 
                             Spacer(modifier = Modifier.height(10.dp))
 
-                            Text(text ="Persian", fontSize = 20.sp, color = Color.Black
+                            Image(
+                                painter = painterResource(R.drawable.img_22),
+                                contentDescription = "Ecommerce",
+                                modifier = Modifier.size(400.dp).fillMaxSize().clip(CircleShape).padding(start = 10.dp)
                             )
+
+
+
+
+
                         }
 
 
                     }
-                    //End of Card-1
+                    //End of Card-2
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+
+
+                    //Card-3
+                    Card(modifier = Modifier
+                        .width(200.dp)
+                        .height(300.dp)
+                        .padding(start = 20.dp)
+                        .clickable{navController.navigate(ROUT_ABOUT)}
+                        .clip(shape = RoundedCornerShape(10.dp)),
+                        colors = CardDefaults.cardColors(Cyan),
+
+                        ) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+
+                        ) {
+
+                            Spacer(modifier = Modifier.height(5.dp))
+
+
+
+
+                            Text(text ="Ragamuffin", fontSize = 20.sp, color = Color.Black
+                            )
+
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            Image(
+                                painter = painterResource(R.drawable.img_23),
+                                contentDescription = "Ecommerce",
+                                modifier = Modifier.size(400.dp).fillMaxSize().clip(CircleShape).padding(start = 10.dp)
+                            )
+
+
+
+
+
+                        }
+
+
+                    }
+                    //End of Card-3
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+
+
+                    //Card-4
+                    Card(modifier = Modifier
+                        .width(200.dp)
+                        .height(300.dp)
+                        .padding(start = 20.dp)
+                        .clickable{navController.navigate(ROUT_ABOUT)}
+                        .clip(shape = RoundedCornerShape(10.dp)),
+                        colors = CardDefaults.cardColors(Cyan),
+
+                        ) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+
+                        ) {
+
+                            Spacer(modifier = Modifier.height(5.dp))
+
+
+
+
+                            Text(text ="Ragamuffin", fontSize = 20.sp, color = Color.Black
+                            )
+
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            Image(
+                                painter = painterResource(R.drawable.img_24),
+                                contentDescription = "Ecommerce",
+                                modifier = Modifier.size(400.dp).fillMaxSize().clip(CircleShape).padding(start = 10.dp)
+                            )
+
+
+
+
+
+                        }
+
+
+                    }
+                    //End of Card-4
+
+
+                    Spacer(modifier = Modifier.width(10.dp))
+
+
+
+                    //Card-5
+                    Card(modifier = Modifier
+                        .width(200.dp)
+                        .height(300.dp)
+                        .padding(start = 20.dp)
+                        .clickable{navController.navigate(ROUT_ABOUT)}
+                        .clip(shape = RoundedCornerShape(10.dp)),
+                        colors = CardDefaults.cardColors(Cyan),
+
+                        ) {
+                        Column(
+                            modifier = Modifier.fillMaxSize(),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+
+                        ) {
+
+                            Spacer(modifier = Modifier.height(5.dp))
+
+
+
+
+                            Text(text ="Maine Coon", fontSize = 20.sp, color = Color.Black
+                            )
+
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            Image(
+                                painter = painterResource(R.drawable.img_25),
+                                contentDescription = "Ecommerce",
+                                modifier = Modifier.size(400.dp).fillMaxSize().clip(CircleShape).padding(start = 10.dp)
+                            )
+
+
+
+
+
+                        }
+
+
+                    }
+                    //End of Card-5
+
+
+
+
+
+
+
+
+
                 }
                 //end of main row
 
 
 
 
-                Spacer(modifier = Modifier.height(20.dp))
+
+
+
+
+
 
 
 
