@@ -74,7 +74,7 @@ fun PersianScreen(navController: NavController){
         //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("Persian") },
+                title = { Text("Persian", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = { /* Handle back/nav */ }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -348,21 +348,21 @@ fun PersianScreen(navController: NavController){
                                 },
                                 colors = ButtonDefaults.buttonColors(Color.LightGray),
                                 shape = RoundedCornerShape(500.dp),
-                                modifier = Modifier.fillMaxWidth().padding(start = 10.dp, end = 10.dp),
+                                modifier = Modifier.fillMaxWidth(),
                             ) {
 
                                 Image(
                                     painter = painterResource(R.drawable.img_29),
                                     contentDescription = "Ecommerce",
-                                    modifier = Modifier.size(50.dp)
+                                    modifier = Modifier.size(100.dp)
                                 )
 
                                 Spacer(modifier = Modifier.width(20.dp))
 
                                 Text(
-                                    text = "Adoption",
+                                    text = "Adopt Now",
                                     color = Color.Black,
-                                    fontSize = 20.sp,
+                                    fontSize = 30.sp,
 
                                     )
 
