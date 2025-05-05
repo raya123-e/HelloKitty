@@ -169,7 +169,7 @@ fun HomeScreen(navController: NavController){
                 Image(
                     painter = painterResource(R.drawable.img_28),
                     contentDescription = "anime",
-                    modifier = Modifier.fillMaxWidth().height(310.dp),
+                    modifier = Modifier.fillMaxWidth().height(335.dp),
                     contentScale = ContentScale.FillWidth
                 )
 
@@ -206,17 +206,7 @@ fun HomeScreen(navController: NavController){
                 //Main row
 
 
-                Spacer(modifier = Modifier.height(5.dp))
 
-                Text(text = "Most commonly adopted Cats",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontFamily = FontFamily.Serif,
-                    modifier = Modifier.padding(start = 10.dp),
-                    textDecoration = TextDecoration.Underline
-
-
-                )
 
                 Spacer(modifier = Modifier.height(5.dp))
 
@@ -234,7 +224,7 @@ fun HomeScreen(navController: NavController){
                     //Card-1
                     Card(modifier = Modifier
                         .width(200.dp)
-                        .height(300.dp)
+                        .height(290.dp)
                         .padding(start = 20.dp)
                         .clickable{navController.navigate(ROUT_ABOUT)}
                         .clip(shape = RoundedCornerShape(10.dp)),
@@ -283,7 +273,7 @@ fun HomeScreen(navController: NavController){
                     //Card-2
                     Card(modifier = Modifier
                         .width(200.dp)
-                        .height(300.dp)
+                        .height(290.dp)
                         .padding(start = 20.dp)
                         .clickable{navController.navigate(ROUT_ABOUT)}
                         .clip(shape = RoundedCornerShape(10.dp)),
@@ -330,7 +320,7 @@ fun HomeScreen(navController: NavController){
                     //Card-3
                     Card(modifier = Modifier
                         .width(200.dp)
-                        .height(300.dp)
+                        .height(290.dp)
                         .padding(start = 20.dp)
                         .clickable{navController.navigate(ROUT_ABOUT)}
                         .clip(shape = RoundedCornerShape(10.dp)),
@@ -377,7 +367,7 @@ fun HomeScreen(navController: NavController){
                     //Card-4
                     Card(modifier = Modifier
                         .width(200.dp)
-                        .height(300.dp)
+                        .height(290.dp)
                         .padding(start = 20.dp)
                         .clickable{navController.navigate(ROUT_ABOUT)}
                         .clip(shape = RoundedCornerShape(10.dp)),
@@ -425,7 +415,7 @@ fun HomeScreen(navController: NavController){
                     //Card-5
                     Card(modifier = Modifier
                         .width(200.dp)
-                        .height(300.dp)
+                        .height(290.dp)
                         .padding(start = 20.dp)
                         .clickable{navController.navigate(ROUT_ABOUT)}
                         .clip(shape = RoundedCornerShape(10.dp)),
