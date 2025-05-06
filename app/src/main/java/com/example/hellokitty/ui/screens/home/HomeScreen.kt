@@ -64,6 +64,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
 import com.example.hellokitty.navigation.ROUT_ABOUT
 import com.example.hellokitty.navigation.ROUT_HOME
+import com.example.hellokitty.navigation.ROUT_PERSIAN
+import com.example.hellokitty.navigation.ROUT_RAGAMUFFIN
+import com.example.hellokitty.navigation.ROUT_RAGDOLL
+import com.example.hellokitty.navigation.ROUT_WIREHAIR
 import com.example.hellokitty.ui.theme.Cyan
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -226,7 +230,7 @@ fun HomeScreen(navController: NavController){
                         .width(200.dp)
                         .height(290.dp)
                         .padding(start = 20.dp)
-                        .clickable{navController.navigate(ROUT_ABOUT)}
+                        .clickable{navController.navigate(ROUT_PERSIAN)}
                         .clip(shape = RoundedCornerShape(10.dp)),
                         colors = CardDefaults.cardColors(Cyan),
 
@@ -275,7 +279,7 @@ fun HomeScreen(navController: NavController){
                         .width(200.dp)
                         .height(290.dp)
                         .padding(start = 20.dp)
-                        .clickable{navController.navigate(ROUT_ABOUT)}
+                        .clickable{navController.navigate(ROUT_RAGDOLL)}
                         .clip(shape = RoundedCornerShape(10.dp)),
                         colors = CardDefaults.cardColors(Cyan),
 
@@ -322,7 +326,8 @@ fun HomeScreen(navController: NavController){
                         .width(200.dp)
                         .height(290.dp)
                         .padding(start = 20.dp)
-                        .clickable{navController.navigate(ROUT_ABOUT)}
+                        .clickable{navController.navigate(ROUT_RAGAMUFFIN)}
+
                         .clip(shape = RoundedCornerShape(10.dp)),
                         colors = CardDefaults.cardColors(Cyan),
 
@@ -369,7 +374,8 @@ fun HomeScreen(navController: NavController){
                         .width(200.dp)
                         .height(290.dp)
                         .padding(start = 20.dp)
-                        .clickable{navController.navigate(ROUT_ABOUT)}
+                        .clickable{navController.navigate(ROUT_WIREHAIR)}
+
                         .clip(shape = RoundedCornerShape(10.dp)),
                         colors = CardDefaults.cardColors(Cyan),
 
@@ -386,7 +392,7 @@ fun HomeScreen(navController: NavController){
 
 
 
-                            Text(text ="Ragamuffin", fontSize = 20.sp, color = Color.Black
+                            Text(text ="American Wirehair", fontSize = 20.sp, color = Color.Black
                             )
 
                             Spacer(modifier = Modifier.height(10.dp))

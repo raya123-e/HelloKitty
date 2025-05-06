@@ -1,5 +1,6 @@
 package com.example.hellokitty.ui.screens.cats
 
+
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -64,7 +65,7 @@ import com.example.hellokitty.ui.theme.Cyan
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersianScreen(navController: NavController){
+fun RagamuffinScreen(navController: NavController){
 
     //Scaffold
 
@@ -74,7 +75,7 @@ fun PersianScreen(navController: NavController){
         //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("Persian", color = Color.Black) },
+                title = { Text("Ragamuffin", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = { /* Handle back/nav */ }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -147,9 +148,9 @@ fun PersianScreen(navController: NavController){
                 Box {
 
                     Image(
-                        painter = painterResource(R.drawable.img_21),
+                        painter = painterResource(R.drawable.img_23),
                         contentDescription = "anime",
-                        modifier = Modifier.fillMaxWidth().height(600.dp),
+                        modifier = Modifier.fillMaxWidth().height(490.dp),
                         contentScale = ContentScale.FillWidth
                     )
 
@@ -167,20 +168,20 @@ fun PersianScreen(navController: NavController){
                     ){
                         Column (
                             modifier = Modifier.fillMaxSize().padding(start = 20.dp,end = 20.dp),
-                          
+
 
 
 
 
                             ) {
-                           //row
+                            //row
                             Row {
 
                                 Spacer(modifier = Modifier.height(10.dp))
 
 
                                 Text(
-                                    text = "Persian Cat",
+                                    text = "Ragamuffin Cat",
                                     fontSize = 30.sp,
                                     fontFamily = FontFamily.Monospace,
                                     fontWeight = FontWeight.Bold,
@@ -191,10 +192,10 @@ fun PersianScreen(navController: NavController){
 
                                 )
 
-                                Spacer(modifier = Modifier.width(50.dp))
+                                Spacer(modifier = Modifier.width(20.dp))
 
 
-                                Text(text = "100$", color = Color.Magenta, fontSize = 30.sp)
+                                Text(text = "120$", color = Color.Magenta, fontSize = 30.sp)
 
 
 
@@ -205,6 +206,9 @@ fun PersianScreen(navController: NavController){
 
 //row 2
                             Row {
+
+                                Spacer(modifier = Modifier.height(30.dp))
+
 
                                 //Card-1
                                 Card(modifier = Modifier
@@ -228,7 +232,7 @@ fun PersianScreen(navController: NavController){
 
                                         Spacer(modifier = Modifier.height(10.dp))
 
-                                        Text(text ="1", fontSize = 20.sp, color = Color.Black)
+                                        Text(text ="1.5yrs", fontSize = 20.sp, color = Color.Black)
 
 
 
@@ -299,7 +303,7 @@ fun PersianScreen(navController: NavController){
 
                                         Spacer(modifier = Modifier.height(10.dp))
 
-                                        Text(text ="White", fontSize = 20.sp, color = Color.Black)
+                                        Text(text ="Mixed", fontSize = 20.sp, color = Color.Black)
 
 
 
@@ -330,8 +334,8 @@ fun PersianScreen(navController: NavController){
                             Spacer(modifier = Modifier.height(20.dp))
 
 
-                            Text(text = "The Persian cat, also known as the Persian Longhair, is a long-haired breed of cat characterised by a round face and short muzzle.In 2021, Persian cats were ranked as the fourth-most popular cat breed in the world according to the Cat Fanciers' Association, an American international cat registry."
-                                   )
+                            Text(text = "The Ragamuffin is a breed of domestic cat. It was once considered to be a variant of the Ragdoll cat but was established as a separate breed in 1994. Ragamuffins are notable for their friendly personalities and thick fur."
+                            )
 
 
                             Spacer(modifier = Modifier.height(20.dp))
@@ -344,13 +348,13 @@ fun PersianScreen(navController: NavController){
                                 },
                                 colors = ButtonDefaults.buttonColors(Color.LightGray),
                                 shape = RoundedCornerShape(500.dp),
-                                modifier = Modifier.fillMaxWidth().size(70.dp)
+                                modifier = Modifier.fillMaxWidth().size(100.dp)
                             ) {
 
                                 Image(
                                     painter = painterResource(R.drawable.img_29),
                                     contentDescription = "Ecommerce",
-                                    modifier = Modifier.size(100.dp)
+                                    modifier = Modifier.size(90.dp)
                                 )
 
                                 Spacer(modifier = Modifier.width(20.dp))
@@ -358,7 +362,7 @@ fun PersianScreen(navController: NavController){
                                 Text(
                                     text = "Adopt Now",
                                     color = Color.Black,
-                                    fontSize = 30.sp,
+                                    fontSize = 20.sp,
 
                                     )
 
@@ -412,6 +416,6 @@ fun PersianScreen(navController: NavController){
 
 @Preview(showBackground = true)
 @Composable
-fun PersianScreenPreview(){
-    PersianScreen(navController= rememberNavController())
+fun RagamuffinScreenPreview(){
+    RagamuffinScreen(navController= rememberNavController())
 }

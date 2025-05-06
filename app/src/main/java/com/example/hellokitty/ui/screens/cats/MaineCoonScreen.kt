@@ -1,5 +1,6 @@
 package com.example.hellokitty.ui.screens.cats
 
+
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -64,7 +65,7 @@ import com.example.hellokitty.ui.theme.Cyan
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersianScreen(navController: NavController){
+fun MaineCoonScreen(navController: NavController){
 
     //Scaffold
 
@@ -74,7 +75,7 @@ fun PersianScreen(navController: NavController){
         //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("Persian", color = Color.Black) },
+                title = { Text("MaineCoon", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = { /* Handle back/nav */ }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -147,9 +148,9 @@ fun PersianScreen(navController: NavController){
                 Box {
 
                     Image(
-                        painter = painterResource(R.drawable.img_21),
+                        painter = painterResource(R.drawable.img_25),
                         contentDescription = "anime",
-                        modifier = Modifier.fillMaxWidth().height(600.dp),
+                        modifier = Modifier.fillMaxWidth().height(500.dp),
                         contentScale = ContentScale.FillWidth
                     )
 
@@ -167,20 +168,20 @@ fun PersianScreen(navController: NavController){
                     ){
                         Column (
                             modifier = Modifier.fillMaxSize().padding(start = 20.dp,end = 20.dp),
-                          
+
 
 
 
 
                             ) {
-                           //row
+                            //row
                             Row {
 
                                 Spacer(modifier = Modifier.height(10.dp))
 
 
                                 Text(
-                                    text = "Persian Cat",
+                                    text = "MaineCoon Cat",
                                     fontSize = 30.sp,
                                     fontFamily = FontFamily.Monospace,
                                     fontWeight = FontWeight.Bold,
@@ -194,7 +195,7 @@ fun PersianScreen(navController: NavController){
                                 Spacer(modifier = Modifier.width(50.dp))
 
 
-                                Text(text = "100$", color = Color.Magenta, fontSize = 30.sp)
+                                Text(text = "500$", color = Color.Magenta, fontSize = 30.sp)
 
 
 
@@ -203,7 +204,7 @@ fun PersianScreen(navController: NavController){
                             }
                             //end row
 
-//row 2
+                        //row 2
                             Row {
 
                                 //Card-1
@@ -228,7 +229,7 @@ fun PersianScreen(navController: NavController){
 
                                         Spacer(modifier = Modifier.height(10.dp))
 
-                                        Text(text ="1", fontSize = 20.sp, color = Color.Black)
+                                        Text(text ="0.9yrs", fontSize = 20.sp, color = Color.Black)
 
 
 
@@ -299,7 +300,7 @@ fun PersianScreen(navController: NavController){
 
                                         Spacer(modifier = Modifier.height(10.dp))
 
-                                        Text(text ="White", fontSize = 20.sp, color = Color.Black)
+                                        Text(text ="Mixed", fontSize = 20.sp, color = Color.Black)
 
 
 
@@ -330,8 +331,8 @@ fun PersianScreen(navController: NavController){
                             Spacer(modifier = Modifier.height(20.dp))
 
 
-                            Text(text = "The Persian cat, also known as the Persian Longhair, is a long-haired breed of cat characterised by a round face and short muzzle.In 2021, Persian cats were ranked as the fourth-most popular cat breed in the world according to the Cat Fanciers' Association, an American international cat registry."
-                                   )
+                            Text(text = "The Maine Coon is a large and social cat, commonly referred to as \"the gentle giant.\" The Maine Coon is predominantly known for its size and dense coat of fur which helps it survive in the harsh climate of Maine. The Maine Coon is often cited as having \"dog-like\" characteristics."
+                            )
 
 
                             Spacer(modifier = Modifier.height(20.dp))
@@ -412,6 +413,6 @@ fun PersianScreen(navController: NavController){
 
 @Preview(showBackground = true)
 @Composable
-fun PersianScreenPreview(){
-    PersianScreen(navController= rememberNavController())
+fun MaineCoonScreenPreview(){
+    MaineCoonScreen(navController= rememberNavController())
 }

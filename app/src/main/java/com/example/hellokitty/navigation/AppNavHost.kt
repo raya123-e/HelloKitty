@@ -12,8 +12,11 @@ import com.example.hellokitty.repository.UserRepository
 import com.example.hellokitty.ui.screens.about.AboutScreen
 import com.example.hellokitty.ui.screens.auth.LoginScreen
 import com.example.hellokitty.ui.screens.auth.RegisterScreen
+import com.example.hellokitty.ui.screens.cats.MaineCoonScreen
 import com.example.hellokitty.ui.screens.cats.PersianScreen
+import com.example.hellokitty.ui.screens.cats.RagamuffinScreen
 import com.example.hellokitty.ui.screens.cats.RagdollScreen
+import com.example.hellokitty.ui.screens.cats.WirehairScreen
 import com.example.hellokitty.ui.screens.home.HomeScreen
 import com.example.hellokitty.ui.screens.splash.SplashScreen
 import com.example.hellokitty.ui.screens.start.StartScreen
@@ -79,6 +82,22 @@ fun AppNavHost(
         composable(ROUT_RAGDOLL) {
             RagdollScreen(navController)
         }
+
+
+        composable(ROUT_RAGAMUFFIN) {
+            RagamuffinScreen(navController)
+        }
+
+
+        composable(ROUT_WIREHAIR) {
+            WirehairScreen(navController)
+        }
+
+
+        composable(ROUT_MAINECOON) {
+            MaineCoonScreen(navController)
+        }
+
 
 
 

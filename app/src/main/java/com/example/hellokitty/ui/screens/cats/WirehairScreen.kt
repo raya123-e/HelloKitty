@@ -1,5 +1,6 @@
 package com.example.hellokitty.ui.screens.cats
 
+
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -64,7 +65,7 @@ import com.example.hellokitty.ui.theme.Cyan
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersianScreen(navController: NavController){
+fun WirehairScreen(navController: NavController){
 
     //Scaffold
 
@@ -74,7 +75,7 @@ fun PersianScreen(navController: NavController){
         //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("Persian", color = Color.Black) },
+                title = { Text(" American Wirehair", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = { /* Handle back/nav */ }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -147,9 +148,9 @@ fun PersianScreen(navController: NavController){
                 Box {
 
                     Image(
-                        painter = painterResource(R.drawable.img_21),
+                        painter = painterResource(R.drawable.img_33),
                         contentDescription = "anime",
-                        modifier = Modifier.fillMaxWidth().height(600.dp),
+                        modifier = Modifier.fillMaxWidth().height(430.dp),
                         contentScale = ContentScale.FillWidth
                     )
 
@@ -167,20 +168,20 @@ fun PersianScreen(navController: NavController){
                     ){
                         Column (
                             modifier = Modifier.fillMaxSize().padding(start = 20.dp,end = 20.dp),
-                          
+
 
 
 
 
                             ) {
-                           //row
+                            //row
                             Row {
 
                                 Spacer(modifier = Modifier.height(10.dp))
 
 
                                 Text(
-                                    text = "Persian Cat",
+                                    text = "Orange Cat",
                                     fontSize = 30.sp,
                                     fontFamily = FontFamily.Monospace,
                                     fontWeight = FontWeight.Bold,
@@ -194,7 +195,7 @@ fun PersianScreen(navController: NavController){
                                 Spacer(modifier = Modifier.width(50.dp))
 
 
-                                Text(text = "100$", color = Color.Magenta, fontSize = 30.sp)
+                                Text(text = "50$", color = Color.Magenta, fontSize = 30.sp)
 
 
 
@@ -228,7 +229,7 @@ fun PersianScreen(navController: NavController){
 
                                         Spacer(modifier = Modifier.height(10.dp))
 
-                                        Text(text ="1", fontSize = 20.sp, color = Color.Black)
+                                        Text(text ="1.2yrs", fontSize = 20.sp, color = Color.Black)
 
 
 
@@ -263,7 +264,7 @@ fun PersianScreen(navController: NavController){
 
                                         Spacer(modifier = Modifier.height(10.dp))
 
-                                        Text(text ="Female", fontSize = 20.sp, color = Color.Black)
+                                        Text(text ="Male", fontSize = 20.sp, color = Color.Black)
 
 
 
@@ -299,7 +300,7 @@ fun PersianScreen(navController: NavController){
 
                                         Spacer(modifier = Modifier.height(10.dp))
 
-                                        Text(text ="White", fontSize = 20.sp, color = Color.Black)
+                                        Text(text ="Orange", fontSize = 20.sp, color = Color.Black)
 
 
 
@@ -330,8 +331,8 @@ fun PersianScreen(navController: NavController){
                             Spacer(modifier = Modifier.height(20.dp))
 
 
-                            Text(text = "The Persian cat, also known as the Persian Longhair, is a long-haired breed of cat characterised by a round face and short muzzle.In 2021, Persian cats were ranked as the fourth-most popular cat breed in the world according to the Cat Fanciers' Association, an American international cat registry."
-                                   )
+                            Text(text = "The American Wirehair is a breed of domestic cat originating in upstate New York, which is characterized by its wiry fur and crinkly whiskers caused by a genetic mutation. As of 2017, though the breed is well-known, it is ranked as the rarest of the 41 Cat Fanciers' Association breeds."
+                            )
 
 
                             Spacer(modifier = Modifier.height(20.dp))
@@ -412,6 +413,6 @@ fun PersianScreen(navController: NavController){
 
 @Preview(showBackground = true)
 @Composable
-fun PersianScreenPreview(){
-    PersianScreen(navController= rememberNavController())
+fun WirehairScreenPreview(){
+    WirehairScreen(navController= rememberNavController())
 }
