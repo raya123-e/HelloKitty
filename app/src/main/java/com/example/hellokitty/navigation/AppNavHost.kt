@@ -13,6 +13,7 @@ import com.example.hellokitty.ui.screens.about.AboutScreen
 import com.example.hellokitty.ui.screens.auth.LoginScreen
 import com.example.hellokitty.ui.screens.auth.RegisterScreen
 import com.example.hellokitty.ui.screens.cats.PersianScreen
+import com.example.hellokitty.ui.screens.cats.RagdollScreen
 import com.example.hellokitty.ui.screens.home.HomeScreen
 import com.example.hellokitty.ui.screens.splash.SplashScreen
 import com.example.hellokitty.ui.screens.start.StartScreen
@@ -73,6 +74,13 @@ fun AppNavHost(
         composable(ROUT_PERSIAN) {
             PersianScreen(navController)
         }
+
+
+        composable(ROUT_RAGDOLL) {
+            RagdollScreen(navController)
+        }
+
+
 
 
 
