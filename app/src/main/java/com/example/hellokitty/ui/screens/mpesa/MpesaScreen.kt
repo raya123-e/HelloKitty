@@ -4,9 +4,8 @@ package com.example.hellokitty.ui.screens.mpesa
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
@@ -16,9 +15,8 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -47,18 +45,23 @@ fun MpesaScreenPreview(){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MpesaScreen( navController: NavController
+
+
 ) {
+
+
 
 
     //Scaffold
 
     var selectedIndex by remember { mutableStateOf(0) }
+    val mContext = LocalContext.current
 
     Scaffold(
         //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("M-Pesa") },
+                title = { Text("M-Pesa", color = Color.Black) },
                 navigationIcon = {
                     IconButton(onClick = { /* Handle back/nav */ }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
@@ -115,14 +118,10 @@ fun MpesaScreen( navController: NavController
         content = { paddingValues ->
             Column(
                 modifier = Modifier
-                    .padding(paddingValues )
-                    .verticalScroll(rememberScrollState())
-                    .paint(painter = painterResource(R.drawable.img_35), contentScale = ContentScale.FillBounds)
-
+                    .padding(paddingValues)
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
-
 
 
                 ) {
@@ -130,108 +129,101 @@ fun MpesaScreen( navController: NavController
 
                 //Main Contents of the page
 
-
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Cyan.copy(alpha = 0.1f))
-
-                        .padding(20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .background(
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Color(0xFFF4BBA7), // your background color
+                                    Color(0xFFFCE4EC),
+                                    Color(0xFFE1BEE7)
+                                )
+                            )
+                        )
+                        .padding(24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
-                    // Title
+                    // Header
                     Text(
-                        text = "Payment Purr-fection 🐾",
+                        text = "Payment Purr-fection",
                         fontSize = 28.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Cyan,
-                        fontFamily = FontFamily.Serif,
-                        modifier = Modifier.padding(bottom = 20.dp)
+                        color = Color(0xFF641B80), // Deep brownish-purple
+                        fontFamily = FontFamily.Serif
                     )
 
+                    Spacer(modifier = Modifier.height(24.dp))
 
-                    val mContext = LocalContext.current
+                    Text(
+                        text = "Pay with",
+                        fontSize = 20.sp,
+                        color = Color(0xFF8D1BBB)
+                    )
 
-                    Column(
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    // M-Pesa Button (styled like image)
+                    Button(
+                        onClick = {
+
+                            val simToolKitLaunchIntent =
+                                mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
+                            simToolKitLaunchIntent?.let { mContext.startActivity(it)}
+
+                        },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFECB3)),
+                        shape = RoundedCornerShape(32.dp),
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(horizontal = 24.dp, vertical = 32.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween
+                            .fillMaxWidth(0.7f)
+                            .height(64.dp)
                     ) {
-                        Text(
-                            text = "Pay with M-Pesa 🐾",
-                            fontSize = 32.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color(0xFF00BCD4)
+                        Image(
+                            painter = painterResource(id = R.drawable.mpesa_logo), // You'll need to add this
+                            contentDescription = "M-Pesa Logo",
+                            modifier = Modifier.height(40.dp)
                         )
-
-
-                        Spacer(modifier = Modifier.height(10.dp))
-
-
-
-
-
-
-                        //M-pesa button
-                        Button(
-                            onClick = {
-                                val simToolKitLaunchIntent =
-                                    mContext.packageManager.getLaunchIntentForPackage("com.android.stk")
-                                simToolKitLaunchIntent?.let { mContext.startActivity(it) }
-                            },
-                            colors = ButtonDefaults.buttonColors(Cyan),
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp),
-                        ) {
-
-
-
-                            Image(
-                                painter = painterResource(R.drawable.img_34),
-                                contentDescription = "Ecommerce",
-                                modifier = Modifier.fillMaxWidth().width(450.dp)
-                            )
-                        }
-
-                        //end of button
-
-
                     }
 
+                    Spacer(modifier = Modifier.height(24.dp))
 
-
-
-
-
-                    // Adopt Button
+                    // Adoption Button
                     Button(
-                        onClick = { /* navigate or show confirmation */ },
-                        colors = ButtonDefaults.buttonColors(containerColor = Cyan),
-                        shape = RoundedCornerShape(50.dp),
+                        onClick = { /* adoption nav */ },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF8A65)),
+                        shape = RoundedCornerShape(32.dp),
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 30.dp)
+                            .fillMaxWidth(0.9f)
+                            .height(64.dp)
                     ) {
                         Text(
-                            text = "Pawceed to Adoption 🐾",
-                            fontSize = 20.sp,
-                            color = Color.White
+                            text = "Pawceed to Adoption",
+                            fontSize = 18.sp,
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold
                         )
                     }
                 }
-
-
             }
-
-
 
         }
     )
 
     //End of scaffold
 
+
+
 }
+
+
+
+
+
+
+
+
+
+
 
 
