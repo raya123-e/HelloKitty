@@ -12,12 +12,14 @@ import com.example.hellokitty.repository.UserRepository
 import com.example.hellokitty.ui.screens.about.AboutScreen
 import com.example.hellokitty.ui.screens.auth.LoginScreen
 import com.example.hellokitty.ui.screens.auth.RegisterScreen
+import com.example.hellokitty.ui.screens.card.CardScreen
 import com.example.hellokitty.ui.screens.cats.MaineCoonScreen
 import com.example.hellokitty.ui.screens.cats.PersianScreen
 import com.example.hellokitty.ui.screens.cats.RagamuffinScreen
 import com.example.hellokitty.ui.screens.cats.RagdollScreen
 import com.example.hellokitty.ui.screens.cats.WirehairScreen
 import com.example.hellokitty.ui.screens.home.HomeScreen
+import com.example.hellokitty.ui.screens.mpesa.MpesaScreen
 import com.example.hellokitty.ui.screens.splash.SplashScreen
 import com.example.hellokitty.ui.screens.start.StartScreen
 import com.example.hellokitty.viewmodel.AuthViewModel
@@ -97,6 +99,19 @@ fun AppNavHost(
         composable(ROUT_MAINECOON) {
             MaineCoonScreen(navController)
         }
+
+        composable(ROUT_CARD) {
+            CardScreen(navController)
+        }
+
+
+        composable(ROUT_MPESA) {
+            MpesaScreen(navController)
+        }
+
+
+
+
 
 
 
