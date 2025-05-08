@@ -20,6 +20,7 @@ import com.example.hellokitty.ui.screens.cats.RagdollScreen
 import com.example.hellokitty.ui.screens.cats.WirehairScreen
 import com.example.hellokitty.ui.screens.home.HomeScreen
 import com.example.hellokitty.ui.screens.mpesa.MpesaScreen
+import com.example.hellokitty.ui.screens.payment.PaymentScreen
 import com.example.hellokitty.ui.screens.splash.SplashScreen
 import com.example.hellokitty.ui.screens.start.StartScreen
 import com.example.hellokitty.viewmodel.AuthViewModel
@@ -108,6 +109,13 @@ fun AppNavHost(
         composable(ROUT_MPESA) {
             MpesaScreen(navController)
         }
+
+
+        composable(ROUT_PAYMENT) {
+            PaymentScreen(navController)
+        }
+
+
 
 
 
