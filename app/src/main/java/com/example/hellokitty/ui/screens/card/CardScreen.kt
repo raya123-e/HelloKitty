@@ -1,72 +1,64 @@
 package com.example.hellokitty.ui.screens.card
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.hellokitty.R
+import com.example.hellokitty.navigation.ROUT_HOME
+import com.example.hellokitty.ui.theme.Cyan
 
-
-
-    import androidx.compose.foundation.background
-    import androidx.compose.foundation.shape.RoundedCornerShape
-    import androidx.compose.foundation.layout.*
-    import androidx.compose.foundation.rememberScrollState
-    import androidx.compose.foundation.text.KeyboardOptions
-    import androidx.compose.foundation.verticalScroll
-    import androidx.compose.material.icons.Icons
-    import androidx.compose.material.icons.filled.ArrowBack
-    import androidx.compose.material.icons.filled.Favorite
-    import androidx.compose.material.icons.filled.Home
-    import androidx.compose.material.icons.filled.Person
-    import androidx.compose.material3.*
-    import androidx.compose.runtime.*
-    import androidx.compose.ui.Alignment
-    import androidx.compose.ui.Modifier
-    import androidx.compose.ui.graphics.Color
-    import androidx.compose.ui.text.font.FontFamily
-    import androidx.compose.ui.text.font.FontWeight
-    import androidx.compose.ui.text.input.KeyboardType
-    import androidx.compose.ui.unit.dp
-    import androidx.compose.ui.unit.sp
-    import androidx.navigation.compose.rememberNavController
-    import androidx.compose.ui.tooling.preview.Preview
-    import androidx.navigation.NavController
-    import com.example.hellokitty.navigation.ROUT_HOME
-    import com.example.hellokitty.ui.theme.Cyan
-
+val PinkPaw = Color(0xFFF4BBA7)
+val SoftCream = Color(0xFFFFF8F4)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-            fun CardScreen(
-                navController: NavController
-            ) {
-
-
-    //Scaffold
-
+fun CardScreen(navController: NavController, catName: String = "Princess Whiskers", catBreed: String = "Persian", catFee: String = "$60.00") {
     var selectedIndex by remember { mutableStateOf(0) }
 
     Scaffold(
-        //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("Contact") },
+                title = { Text("Adopt with Love 🐾") },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle back/nav */ }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Cyan,
+                    containerColor = PinkPaw,
                     titleContentColor = Color.White,
                     navigationIconContentColor = Color.White
                 )
             )
         },
-
-        //BottomBar
         bottomBar = {
-            NavigationBar(
-                containerColor = Cyan
-            ) {
+            NavigationBar(containerColor = PinkPaw) {
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Black) },
+                    icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                     label = { Text("Home") },
                     selected = selectedIndex == 0,
                     onClick = {
@@ -75,46 +67,57 @@ package com.example.hellokitty.ui.screens.card
                     }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Black) },
+                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
                     label = { Text("Favorites") },
                     selected = selectedIndex == 1,
-                    onClick = {
-                        selectedIndex = 1
-                        // navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { selectedIndex = 1 }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black) },
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
                     label = { Text("Profile") },
                     selected = selectedIndex == 2,
-                    onClick = {
-                        selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { selectedIndex = 2 }
                 )
-
             }
-        },
-
-        //FloatingActionButton
-        floatingActionButton = {
-
         },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
-                    .padding(paddingValues )
+                    .padding(paddingValues)
                     .verticalScroll(rememberScrollState())
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
+                    .fillMaxSize()
+                    .background(SoftCream)
+                    .padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text("You're Almost There! 🐱", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = PinkPaw, fontFamily = FontFamily.Serif)
+                Text("Get ready to welcome your new best friend.", fontSize = 16.sp, color = Color.Gray, modifier = Modifier.padding(bottom = 16.dp))
 
-
-
+                Card(
+                    shape = RoundedCornerShape(20.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 24.dp)
                 ) {
-
-
-                //Main Contents of the page
+                    Row(
+                        modifier = Modifier.fillMaxWidth().padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.cat_placeholder),
+                            contentDescription = "Adopted Cat",
+                            modifier = Modifier.size(72.dp),
+                            contentScale = ContentScale.Crop
+                        )
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Column {
+                            Text("Adopting: $catName", fontWeight = FontWeight.Bold)
+                            Text("Breed: $catBreed", color = Color.Gray)
+                            Text("Adoption Fee: $catFee", color = Color.Gray)
+                        }
+                    }
+                }
 
                 var name by remember { mutableStateOf("") }
                 var cardNumber by remember { mutableStateOf("") }
@@ -122,143 +125,34 @@ package com.example.hellokitty.ui.screens.card
                 var cvv by remember { mutableStateOf("") }
                 var saveCard by remember { mutableStateOf(false) }
 
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(Cyan.copy(alpha = 0.1f))
-                        .padding(20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Card(
+                    shape = RoundedCornerShape(24.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    // Title
-                    Text(
-                        text = "Payment Purr-fection 💳🐾",
-                        fontSize = 28.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Cyan,
-                        fontFamily = FontFamily.Serif,
-                        modifier = Modifier.padding(bottom = 20.dp)
-                    )
-
-                    // Name on Card
-                    OutlinedTextField(
-                        value = name,
-                        onValueChange = { name = it },
-                        label = { Text("Name on Card") },
-                        shape = RoundedCornerShape(20.dp),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Cyan,
-                            cursorColor = Cyan
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 10.dp)
-                    )
-
-                    // Card Number
-                    OutlinedTextField(
-                        value = cardNumber,
-                        onValueChange = { cardNumber = it },
-                        label = { Text("Card Number") },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        shape = RoundedCornerShape(20.dp),
-                        colors = OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Cyan,
-                            cursorColor = Cyan
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 10.dp)
-                    )
-
-                    // Expiry and CVV Row
-                    Row(modifier = Modifier.fillMaxWidth()) {
-                        OutlinedTextField(
-                            value = expiry,
-                            onValueChange = { expiry = it },
-                            label = { Text("Expiry") },
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                            shape = RoundedCornerShape(20.dp),
-                            colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = Cyan,
-                                cursorColor = Cyan
-                            ),
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(horizontal =  10.dp, vertical = 10.dp)
-                        )
-
-                        OutlinedTextField(
-                            value = cvv,
-                            onValueChange = { cvv = it },
-                            label = { Text("CVV") },
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                            shape = RoundedCornerShape(20.dp),
-                            colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = Cyan,
-                                cursorColor = Cyan
-                            ),
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(horizontal = 10.dp, vertical = 10.dp)
-                        )
-                    }
-
-                    // Save Card Toggle
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 16.dp)
-                    ) {
-                        Switch(
-                            checked = saveCard,
-                            onCheckedChange = { saveCard = it },
-                            colors = SwitchDefaults.colors(checkedThumbColor = Cyan)
-                        )
-                        Text(
-                            text = "Save card for future meow-purchases 🐾",
-                            fontSize = 14.sp,
-                            modifier = Modifier.padding(start = 8.dp)
-                        )
-                    }
-
-                    // Adopt Button
-                    Button(
-                        onClick = { /* navigate or show confirmation */ },
-                        colors = ButtonDefaults.buttonColors(containerColor = Cyan),
-                        shape = RoundedCornerShape(50.dp),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 30.dp)
-                    ) {
-                        Text(
-                            text = "Pawceed to Adoption 🐾",
-                            fontSize = 20.sp,
-                            color = Color.White
-                        )
+                    Column(modifier = Modifier.padding(20.dp)) {
+                        OutlinedTextField(value = name, onValueChange = { name = it }, label = { Text("Name on Card 🐱") }, shape = RoundedCornerShape(16.dp), colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = PinkPaw, cursorColor = PinkPaw), modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp))
+                        OutlinedTextField(value = cardNumber, onValueChange = { cardNumber = it }, label = { Text("Card Number 💳") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), shape = RoundedCornerShape(16.dp), colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = PinkPaw, cursorColor = PinkPaw), modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp))
+                        Row(modifier = Modifier.fillMaxWidth()) {
+                            OutlinedTextField(value = expiry, onValueChange = { expiry = it }, label = { Text("MM/YY") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), shape = RoundedCornerShape(16.dp), colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = PinkPaw, cursorColor = PinkPaw), modifier = Modifier.weight(1f).padding(8.dp))
+                            OutlinedTextField(value = cvv, onValueChange = { cvv = it }, label = { Text("CVV") }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), shape = RoundedCornerShape(16.dp), colors = OutlinedTextFieldDefaults.colors(focusedBorderColor = PinkPaw, cursorColor = PinkPaw), modifier = Modifier.weight(1f).padding(8.dp))
+                        }
+                        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 12.dp)) {
+                            Switch(checked = saveCard, onCheckedChange = { saveCard = it }, colors = SwitchDefaults.colors(checkedThumbColor = PinkPaw))
+                            Text("Save for future paw-chases 🐾", fontSize = 14.sp, modifier = Modifier.padding(start = 8.dp))
+                        }
+                        Button(onClick = { /* Add payment logic */ }, colors = ButtonDefaults.buttonColors(containerColor = PinkPaw), shape = RoundedCornerShape(50.dp), modifier = Modifier.fillMaxWidth().padding(top = 24.dp)) {
+                            Text("Confirm Adoption", fontSize = 18.sp, color = Color.White)
+                        }
                     }
                 }
-
-
-                }
-
-
-
+            }
         }
     )
-
-    //End of scaffold
-
 }
 
-
-
-
-
-
-
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun CardScreenPreview(){
-    CardScreen(navController= rememberNavController())
+fun CardScreenPreview() {
+    CardScreen(navController = rememberNavController())
 }

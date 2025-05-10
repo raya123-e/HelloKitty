@@ -1,14 +1,9 @@
 package com.example.hellokitty.ui.screens.payment
 
-import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -17,58 +12,40 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
+import com.example.hellokitty.navigation.ROUT_CARD
 import com.example.hellokitty.navigation.ROUT_HOME
+import com.example.hellokitty.navigation.ROUT_MPESA
 import com.example.hellokitty.ui.theme.Cyan
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PaymentScreen(navController: NavController){
-
-    //Scaffold
-
+fun PaymentScreen(navController: NavController) {
+    val context = LocalContext.current
     var selectedIndex by remember { mutableStateOf(0) }
 
     Scaffold(
-        //TopBar
         topBar = {
             TopAppBar(
                 title = { Text("Payment", color = Color.Black) },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle back/nav */ }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                    IconButton(onClick = { navController.navigate(ROUT_HOME) }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -78,12 +55,8 @@ fun PaymentScreen(navController: NavController){
                 )
             )
         },
-
-        //BottomBar
         bottomBar = {
-            NavigationBar(
-                containerColor = Cyan
-            ) {
+            NavigationBar(containerColor = Cyan) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Black) },
                     label = { Text("Home") },
@@ -97,120 +70,142 @@ fun PaymentScreen(navController: NavController){
                     icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Black) },
                     label = { Text("Favorites") },
                     selected = selectedIndex == 1,
-                    onClick = {
-                        selectedIndex = 1
-                        // navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { selectedIndex = 1 }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black) },
                     label = { Text("Profile") },
                     selected = selectedIndex == 2,
-                    onClick = {
-                        selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { selectedIndex = 2 }
                 )
-
             }
-        },
-
-        //FloatingActionButton
-        floatingActionButton = {
-
         },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
-                    .padding(paddingValues )
+                    .fillMaxSize()
+                    .padding(paddingValues)
                     .verticalScroll(rememberScrollState())
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-
-
-
-                ) {
-
-
-                //Main Contents of the page
-                Spacer(modifier = Modifier.height(20.dp))
-
-
-                Button(
-                    onClick = { /* Handle button click here */ },
-                    shape = RoundedCornerShape(50), // Rounded corners
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF1E90FF), // Blue color for the background
-                        contentColor = Color.White // White color for text
-                    ),
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.img_33),
+                    contentDescription = "Hello Kitty Background",
                     modifier = Modifier
-                        .padding(16.dp) // Add some padding
-                        .fillMaxWidth() // Make the button full width
-                        .height(56.dp), // Set a fixed height
-                    elevation = ButtonDefaults.elevatedButtonElevation(8.dp) // Add a little shadow effect
+                        .fillMaxWidth()
+                        .height(180.dp),
+                    contentScale = ContentScale.Crop
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Text(
+                    text = "You're about to adopt:",
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.DarkGray
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    shape = RoundedCornerShape(20.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color.White),
+                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                 ) {
-                    Text(
-                        text = "M-pesa",
-                        fontSize = 20.sp, // Font size for the text
-                        fontWeight = FontWeight.Bold, // Bold text
-                        letterSpacing = 1.sp, // Slight letter spacing
-                        fontFamily = FontFamily.Default                   )
+                    Row(
+                        modifier = Modifier.padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Image(
+                            painter = painterResource(R.drawable.cat_placeholder), // Swap this for real cat image
+                            contentDescription = "Adopted Cat",
+                            modifier = Modifier.size(80.dp),
+                            contentScale = ContentScale.Crop
+                        )
+
+                        Spacer(modifier = Modifier.width(16.dp))
+
+                        Column {
+                            Text("Name: Mr. Fluffy", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                            Text("Breed: Persian", fontSize = 16.sp)
+                            Text("Adoption Fee: KES 2,500", fontSize = 16.sp, color = Color.Gray)
+                        }
+                    }
                 }
-            }
 
+                Spacer(modifier = Modifier.height(30.dp))
 
+                Text(
+                    text = "Choose Your Payment Method",
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 16.dp)
+                )
 
-
-
-
-
-
-
-                val mContext = LocalContext.current
+                PaymentButton(
+                    label = "M-Pesa",
+                    onClick = {
+                        Toast.makeText(context, "Redirecting to M-Pesa payment for Mr. Fluffy", Toast.LENGTH_SHORT).show()
+                        navController.navigate(ROUT_MPESA)
+                    },
+                    icon = painterResource(R.drawable.mpesa_logo)
+                )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
-
-
-
-
-
-
-
-                Button(
+                PaymentButton(
+                    label = "Visa",
                     onClick = {
-                        val callIntent= Intent(Intent.ACTION_DIAL)
-                        callIntent.data="tel:0117434950".toUri()
-                        mContext.startActivity(callIntent)
-
+                        Toast.makeText(context, "Redirecting to Visa payment for Mr. Fluffy", Toast.LENGTH_SHORT).show()
+                        navController.navigate(ROUT_CARD)
                     },
-                    colors = ButtonDefaults.buttonColors(),
-                    shape = RoundedCornerShape(10.dp),
-
-
-                    modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp),
-                ) {
-
-                    Text(
-                        text = "Call us",
-                        fontSize = 20.sp,
-                    )
-                }
-
-
-
+                    icon = painterResource(R.drawable.img_34)
+                )
+            }
         }
     )
+}
 
-    //End of scaffold
-
-
-
+@Composable
+fun PaymentButton(label: String, onClick: () -> Unit, icon: Painter) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(70.dp)
+            .clickable { onClick() },
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFF4BBA7)),
+        shape = RoundedCornerShape(20.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start
+        ) {
+            Image(
+                painter = icon,
+                contentDescription = "$label Icon",
+                modifier = Modifier.size(40.dp)
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(
+                text = label,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PaymentScreenPreview(){
-    PaymentScreen(navController= rememberNavController())
+fun PaymentScreenPreview() {
+    PaymentScreen(navController = rememberNavController())
 }

@@ -1,21 +1,7 @@
 package com.example.hellokitty.ui.screens.cats
 
-
-import android.content.Intent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -25,75 +11,46 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
 import com.example.hellokitty.navigation.ROUT_HOME
+import com.example.hellokitty.navigation.ROUT_PAYMENT
 import com.example.hellokitty.ui.theme.Cyan
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MaineCoonScreen(navController: NavController){
-
-    //Scaffold
-
+fun MaineCoonScreen(navController: NavController) {
     var selectedIndex by remember { mutableStateOf(0) }
+    var isFavorite by remember { mutableStateOf(false) }
 
     Scaffold(
-        //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("MaineCoon", color = Color.Black) },
+                title = { Text("Adopt Me: Maine Coon", color = Color.Black) },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle back/nav */ }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Cyan,
-                    titleContentColor = Color.White,
-                    navigationIconContentColor = Color.White
-                )
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Cyan)
             )
         },
-
-        //BottomBar
         bottomBar = {
-            NavigationBar(
-                containerColor = Cyan
-            ) {
+            NavigationBar(containerColor = Cyan) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Black) },
                     label = { Text("Home") },
@@ -104,315 +61,186 @@ fun MaineCoonScreen(navController: NavController){
                     }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Black) },
+                    icon = {
+                        Icon(
+                            Icons.Default.Favorite,
+                            contentDescription = "Favorites",
+                            tint = if (isFavorite) Color.Red else Color.Black
+                        )
+                    },
                     label = { Text("Favorites") },
                     selected = selectedIndex == 1,
-                    onClick = {
-                        selectedIndex = 1
-                        // navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { isFavorite = !isFavorite }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black) },
                     label = { Text("Profile") },
                     selected = selectedIndex == 2,
-                    onClick = {
-                        selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { selectedIndex = 2 }
                 )
-
-            }
-        },
-
-        //FloatingActionButton
-        floatingActionButton = {
-
-        },
-        content = { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .padding(paddingValues )
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-
-
-
-                ) {
-
-
-                //Main Contents of the page
-
-
-                Box {
-
-                    Image(
-                        painter = painterResource(R.drawable.img_25),
-                        contentDescription = "anime",
-                        modifier = Modifier.fillMaxWidth().height(500.dp),
-                        contentScale = ContentScale.FillWidth
-                    )
-
-
-
-                    //card
-                    Card (modifier = Modifier
-                        .fillMaxWidth()
-                        .align(alignment = Alignment.BottomCenter)
-                        .offset(y = 360.dp)
-                        .clip(shape = RoundedCornerShape(30.dp)),
-                        colors = CardDefaults.cardColors(Color.White)
-
-
-                    ){
-                        Column (
-                            modifier = Modifier.fillMaxSize().padding(start = 20.dp,end = 20.dp),
-
-
-
-
-
-                            ) {
-                            //row
-                            Row {
-
-                                Spacer(modifier = Modifier.height(10.dp))
-
-
-                                Text(
-                                    text = "MaineCoon Cat",
-                                    fontSize = 30.sp,
-                                    fontFamily = FontFamily.Monospace,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color.Black
-
-
-
-
-                                )
-
-                                Spacer(modifier = Modifier.width(50.dp))
-
-
-                                Text(text = "500$", color = Color.Magenta, fontSize = 30.sp)
-
-
-
-
-
-                            }
-                            //end row
-
-                        //row 2
-                            Row {
-
-                                //Card-1
-                                Card(modifier = Modifier
-                                    .width(100.dp)
-                                    .height(100.dp)
-                                    .padding(start = 10.dp),
-                                    colors = CardDefaults.cardColors(Cyan)
-
-                                )
-
-                                {
-                                    Column(
-                                        modifier = Modifier.fillMaxSize(),
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center,
-
-                                        ) {
-
-
-                                        Text(text ="Age", fontSize = 20.sp, color = Color.Red)
-
-                                        Spacer(modifier = Modifier.height(10.dp))
-
-                                        Text(text ="0.9yrs", fontSize = 20.sp, color = Color.Black)
-
-
-
-
-                                    }
-
-
-                                }
-                                //End of Card-1
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-                                //Card-2
-                                Card(modifier = Modifier
-                                    .width(100.dp)
-                                    .height(100.dp)
-                                    .padding(start = 10.dp),
-                                    colors = CardDefaults.cardColors(Cyan)
-
-                                )
-
-                                {
-                                    Column(
-                                        modifier = Modifier.fillMaxSize(),
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center,
-
-                                        ) {
-
-
-                                        Text(text ="Sex", fontSize = 20.sp, color = Color.Red)
-
-                                        Spacer(modifier = Modifier.height(10.dp))
-
-                                        Text(text ="Female", fontSize = 20.sp, color = Color.Black)
-
-
-
-
-                                    }
-
-
-                                }
-                                //End of Card-2
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-
-                                //Card-1
-                                Card(modifier = Modifier
-                                    .width(100.dp)
-                                    .height(100.dp)
-                                    .padding(start = 10.dp),
-                                    colors = CardDefaults.cardColors(Cyan)
-
-                                )
-
-                                {
-                                    Column(
-                                        modifier = Modifier.fillMaxSize(),
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center,
-
-                                        ) {
-
-
-                                        Text(text ="Color", fontSize = 20.sp, color = Color.Red)
-
-                                        Spacer(modifier = Modifier.height(10.dp))
-
-                                        Text(text ="Mixed", fontSize = 20.sp, color = Color.Black)
-
-
-
-
-                                    }
-
-
-                                }
-                                //End of Card-1
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-                            //end of row2
-
-
-                            Spacer(modifier = Modifier.height(20.dp))
-
-
-                            Text(text = "The Maine Coon is a large and social cat, commonly referred to as \"the gentle giant.\" The Maine Coon is predominantly known for its size and dense coat of fur which helps it survive in the harsh climate of Maine. The Maine Coon is often cited as having \"dog-like\" characteristics."
-                            )
-
-
-                            Spacer(modifier = Modifier.height(20.dp))
-
-
-
-                            Button(
-                                onClick = {
-
-                                },
-                                colors = ButtonDefaults.buttonColors(Color.LightGray),
-                                shape = RoundedCornerShape(500.dp),
-                                modifier = Modifier.fillMaxWidth().size(70.dp)
-                            ) {
-
-                                Image(
-                                    painter = painterResource(R.drawable.img_29),
-                                    contentDescription = "Ecommerce",
-                                    modifier = Modifier.size(100.dp)
-                                )
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-                                Text(
-                                    text = "Adopt Now",
-                                    color = Color.Black,
-                                    fontSize = 30.sp,
-
-                                    )
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-                        }
-
-
-
-
-
-                    }
-                    //end card
-
-                }
-
-
-
-
-
-
-
-
-
             }
         }
-    )
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .verticalScroll(rememberScrollState())
+                .fillMaxSize()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            // Gallery
+            Text("Photo Gallery", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color.Black)
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                listOf(R.drawable.mainecoon, R.drawable.img_30, R.drawable.img_38).forEach {
+                    Image(
+                        painter = painterResource(it),
+                        contentDescription = "Gallery Image",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(RoundedCornerShape(20.dp))
+                    )
+                }
+            }
 
-    //End of scaffold
+            Spacer(modifier = Modifier.height(20.dp))
 
+            // Main Info Card
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(Color.White),
+                shape = RoundedCornerShape(30.dp)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(
+                            text = "MaineCoon Cat",
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black
+                        )
+                        Spacer(modifier = Modifier.width(20.dp))
+                        Text(text = "$500", fontSize = 24.sp, color = Color.Magenta)
+                    }
 
+                    Spacer(modifier = Modifier.height(20.dp))
 
+                    // Info Cards
+                    Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                        InfoCard("Age", "0.9yrs")
+                        InfoCard("Sex", "Female")
+                        InfoCard("Color", "Mixed")
+                    }
 
+                    Spacer(modifier = Modifier.height(16.dp))
 
+                    // Description
+                    Text(
+                        text = "The Maine Coon is a large and social cat, commonly referred to as \"the gentle giant.\" Known for its size, fluff, and dog-like charm, it thrives in loving homes. Think of her as the cuddly roommate who purrs instead of paying rent.",
+                        fontSize = 16.sp,
+                        color = Color.DarkGray
+                    )
 
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Adoption Details
+                    Text(
+                        text = "• Vaccinated: ✅ Yes\n• Temperament: 🐾 Affectionate, Playful\n• Good with Kids: 👶 Yes\n• Good with Other Cats: 🐱 Yes",
+                        fontSize = 14.sp,
+                        color = Color.DarkGray
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Foster Info
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = CardDefaults.cardColors(Cyan),
+                        shape = RoundedCornerShape(20.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Image(
+                                painter = painterResource(R.drawable.img_39),
+                                contentDescription = "Foster",
+                                modifier = Modifier
+                                    .size(60.dp)
+                                    .clip(CircleShape),
+                                contentScale = ContentScale.Crop
+                            )
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Column {
+                                Text("Foster Parent: Lily Chen", fontWeight = FontWeight.Bold, color = Color.Black)
+                                Text("Contact: lily.chen@email.com", fontSize = 14.sp, color = Color.DarkGray)
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    // Testimonial
+                    Text(
+                        text = "\"Misty is a total sweetheart. She's calm, cuddly, and loves curling up on the windowsill. She's ready for her forever home!\" — Lily",
+                        fontStyle = FontStyle.Italic,
+                        color = Color.Gray,
+                        fontSize = 14.sp
+                    )
+
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    // Adopt Now Button
+                    Button(
+                        onClick = { navController.navigate(ROUT_PAYMENT) },
+                        colors = ButtonDefaults.buttonColors(Color(0xFFF4BBA7)),
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier.fillMaxWidth().height(60.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.img_29),
+                            contentDescription = "Adopt",
+                            modifier = Modifier.size(30.dp),
+                            tint = Color.Unspecified
+                        )
+                        Spacer(modifier = Modifier.width(12.dp))
+                        Text("Adopt Now", fontSize = 20.sp, color = Color.Black)
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun InfoCard(label: String, value: String) {
+    Card(
+        modifier = Modifier
+            .width(100.dp)
+            .padding(4.dp)
+            .height(100.dp),
+        colors = CardDefaults.cardColors(Cyan),
+        shape = RoundedCornerShape(20.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = label, fontSize = 18.sp, color = Color.Red)
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(text = value, fontSize = 16.sp, color = Color.Black)
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun MaineCoonScreenPreview(){
-    MaineCoonScreen(navController= rememberNavController())
+fun MaineCoonScreenPreview() {
+    MaineCoonScreen(navController = rememberNavController())
 }

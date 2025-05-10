@@ -148,7 +148,7 @@ fun WirehairScreen(navController: NavController){
                 Box {
 
                     Image(
-                        painter = painterResource(R.drawable.img_33),
+                        painter = painterResource(R.drawable.img_37),
                         contentDescription = "anime",
                         modifier = Modifier.fillMaxWidth().height(430.dp),
                         contentScale = ContentScale.FillWidth
