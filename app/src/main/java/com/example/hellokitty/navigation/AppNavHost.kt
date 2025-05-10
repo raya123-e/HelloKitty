@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.hellokitty.ui.screens.dashboard.DashboardScreen
 import com.example.hellokitty.data.UserDatabase
 import com.example.hellokitty.repository.UserRepository
 import com.example.hellokitty.ui.screens.about.AboutScreen
@@ -18,6 +19,7 @@ import com.example.hellokitty.ui.screens.cats.PersianScreen
 import com.example.hellokitty.ui.screens.cats.RagamuffinScreen
 import com.example.hellokitty.ui.screens.cats.RagdollScreen
 import com.example.hellokitty.ui.screens.cats.WirehairScreen
+import com.example.hellokitty.ui.screens.contact.ContactScreen
 import com.example.hellokitty.ui.screens.home.HomeScreen
 import com.example.hellokitty.ui.screens.mpesa.MpesaScreen
 import com.example.hellokitty.ui.screens.payment.PaymentScreen
@@ -113,6 +115,14 @@ fun AppNavHost(
 
         composable(ROUT_PAYMENT) {
             PaymentScreen(navController)
+        }
+
+        composable(ROUT_CONTACT) {
+            ContactScreen(navController)
+        }
+
+        composable(ROUT_DASHBOARD) {
+            DashboardScreen(navController)
         }
 
 

@@ -2,43 +2,19 @@ package com.example.hellokitty.ui.screens.dashboard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
+import androidx.compose.material3.CardDefaults.cardElevation
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,183 +22,204 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
+import com.example.hellokitty.navigation.ROUT_ABOUT
+import com.example.hellokitty.navigation.ROUT_CONTACT
 import com.example.hellokitty.navigation.ROUT_HOME
-import com.example.hellokitty.ui.theme.Cyan
+import com.example.hellokitty.navigation.ROUT_PAYMENT
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DashboardScreen(navController: NavController) {
-    var selectedIndex by remember { mutableStateOf(0) }
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
 
-    Scaffold(
-        // Top Bar
-        topBar = {
-            TopAppBar(
-                title = { Text("Dashboard", color = Color.Black) },
-                navigationIcon = {
-                    IconButton(onClick = { /* Handle back/nav */ }) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Cyan,
-                    titleContentColor = Color.White,
-                    navigationIconContentColor = Color.White
-                )
-            )
-        },
-
-        // Bottom Bar
-        bottomBar = {
-            NavigationBar(
-                containerColor = Cyan
+    ModalNavigationDrawer(
+        drawerState = drawerState,
+        drawerContent = {
+            ModalDrawerSheet(
+                drawerContainerColor = Color.White,
+                drawerShape = RoundedCornerShape(topEnd = 32.dp, bottomEnd = 32.dp)
             ) {
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Black) },
-                    label = { Text("Home") },
-                    selected = selectedIndex == 0,
-                    onClick = {
-                        selectedIndex = 0
-                        navController.navigate(ROUT_HOME)
-                    }
+                Spacer(modifier = Modifier.height(24.dp))
+                Text(
+                    text = "Navigation",
+                    modifier = Modifier.padding(start = 16.dp),
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF8B5E83) // Elegant lavender shade
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Black) },
-                    label = { Text("Favorites") },
-                    selected = selectedIndex == 1,
-                    onClick = {
-                        selectedIndex = 1
-                    }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black) },
-                    label = { Text("Profile") },
-                    selected = selectedIndex == 2,
-                    onClick = {
-                        selectedIndex = 2
-                    }
-                )
+                NavigationDrawerItem(label = { Text("Home") }, selected = false, onClick = {
+                    coroutineScope.launch { drawerState.close() }
+                    navController.navigate(ROUT_HOME)
+                })
+                NavigationDrawerItem(label = { Text("About") }, selected = false, onClick = {
+                    coroutineScope.launch { drawerState.close() }
+                    navController.navigate(ROUT_ABOUT)
+                })
+                NavigationDrawerItem(label = { Text("Contact") }, selected = false, onClick = {
+                    coroutineScope.launch { drawerState.close() }
+                    navController.navigate(ROUT_CONTACT)
+                })
+                NavigationDrawerItem(label = { Text("Payment") }, selected = false, onClick = {
+                    coroutineScope.launch { drawerState.close() }
+                    navController.navigate(ROUT_PAYMENT)
+                })
             }
-        },
-
-        // FloatingActionButton (Optional)
-        floatingActionButton = { },
-
-        // Content
-        content = { paddingValues ->
+        }
+    ) {
+        Scaffold(
+            containerColor = Color(0xFFF8F1E7) // Soft, warm cream for the background
+        ) { innerPadding ->
             Column(
                 modifier = Modifier
-                    .padding(paddingValues)
-                    .verticalScroll(rememberScrollState())
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Top,
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .background(Color(0xFFF8F1E7)) // Elegant neutral background
             ) {
-                // Featured Cat of the Day
-                FeaturedCatCard()
+                // Hero Section: Eye-catching intro before the first row
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(220.dp)
+                        .background(
+                            Brush.verticalGradient(
+                                colors = listOf(Color(0xFFEDD6D6), Color(0xFFF8F1E7))
+                            )
+                        )
+                        .padding(24.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.img_29), // Add your icon here
+                            contentDescription = "Welcome Cat",
+                            modifier = Modifier.size(120.dp)
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Your Purrfect Companion Awaits 🐱",
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF4A3C3A),
+                            fontFamily = FontFamily.Cursive
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Give a cat a home, and they'll give you their heart.",
+                            fontSize = 16.sp,
+                            color = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Button(
+                            onClick = { navController.navigate(ROUT_HOME) },
+                            shape = RoundedCornerShape(12.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF8B5E83))
+                        ) {
+                            Text(text = "Adopt Now", fontSize = 16.sp, color = Color.White)
+                        }
+                    }
+                }
 
-                // Adoption Stats
-                AdoptionStatsSection()
+                // Elegant Card at the top
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    shape = RoundedCornerShape(24.dp), // Rounded corners for a chic look
+                    elevation = cardElevation(12.dp),
+                    colors = CardDefaults.cardColors(containerColor = Color(0xFFF2D1D1)) // Subtle pastel pink
+                ) {
+                    Column(
+                        modifier = Modifier.padding(24.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = "Adopt, Don't Shop",
+                            fontSize = 26.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF4A3C3A),
+                            fontFamily = FontFamily.Cursive // Elegant, playful font
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = "Every cat deserves a cozy forever home.",
+                            fontSize = 16.sp,
+                            color = Color.Gray
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = "Fast Adoption | Health Guaranteed | Loving Companions 🐾",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color(0xFF9E6A6A)
+                        )
+                    }
+                }
 
-                // Quick Actions
-                QuickActionsSection(navController)
+                Spacer(modifier = Modifier.height(24.dp))
+
+                // First Row: Home and About Navigation
+                Row(modifier = Modifier.padding(start = 30.dp, end = 16.dp)) {
+                    NavigationCard("Home", R.drawable.img_40) {
+                        navController.navigate(ROUT_HOME)
+                    }
+                    Spacer(modifier = Modifier.width(16.dp).padding(start = 30.dp, end = 16.dp))
+                    NavigationCard("About", R.drawable.img_41) {
+                        navController.navigate(ROUT_ABOUT)
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+
+                // Second Row: Contact Us and Payment Navigation
+                Row(modifier = Modifier.padding(start = 30.dp, end = 16.dp)) {
+                    NavigationCard("Contact Us", R.drawable.img_42) {
+                        navController.navigate(ROUT_CONTACT)
+                    }
+                    Spacer(modifier = Modifier.width(16.dp).padding(start = 30.dp, end = 16.dp))
+                    NavigationCard("Payment", R.drawable.img_43) {
+                        navController.navigate(ROUT_PAYMENT)
+                    }
+                }
             }
         }
-    )
-}
-
-@Composable
-fun FeaturedCatCard() {
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(16.dp))
-            .background(Cyan)
-            .padding(16.dp)
-    ) {
-        Text(
-            text = "Featured Cat of the Day",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Image(
-            painter = painterResource(id = R.drawable.img_17),
-            contentDescription = "Featured Cat",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(200.dp),
-            contentScale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Meet Momo! She's a friendly Persian cat looking for a forever home.",
-            fontSize = 14.sp,
-            color = Color.White
-        )
     }
 }
 
 @Composable
-fun AdoptionStatsSection() {
-    Column(
+fun NavigationCard(label: String, icon: Int, onClick: () -> Unit) {
+    Card(
         modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
+            .width(160.dp)
+            .height(180.dp)
+            .padding(end = 16.dp, start = 16.dp)
+            .clickable(onClick = onClick),
+        shape = RoundedCornerShape(20.dp),
+        elevation = cardElevation(10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFBE4E4)) // Soft blush color
     ) {
-        Text(
-            text = "Adoption Stats",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Cats Available for Adoption: 25",
-            fontSize = 16.sp,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = "Recent Adoptions: 5",
-            fontSize = 16.sp,
-            color = Color.Black
-        )
-    }
-}
-
-@Composable
-fun QuickActionsSection(navController: NavController) {
-    Column(
-        modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth(),
-            verticalArrangement =(Arrangement.spacedBy(16.dp))
-    ) {
-        Button(
-            onClick = { /* Navigate to favorites */ },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(Cyan)
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "View Favorites", fontSize = 16.sp, color = Color.White)
-        }
-
-        Button(
-            onClick = { /* Navigate to adoption tips */ },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(Cyan)
-        ) {
-            Text(text = "Adoption Tips", fontSize = 16.sp, color = Color.White)
-        }
-
-        Button(
-            onClick = { /* Start the adoption process */ },
-            modifier = Modifier.fillMaxWidth(),
-            colors = ButtonDefaults.buttonColors(Cyan)
-        ) {
-            Text(text = "Start Adoption", fontSize = 16.sp, color = Color.White)
+            Image(
+                painter = painterResource(id = icon),
+                contentDescription = label,
+                modifier = Modifier.size(100.dp) // Keep the image size balanced
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = label,
+                fontSize = 18.sp,
+                color = Color(0xFF4A3C3A),
+                fontWeight = FontWeight.SemiBold,
+                fontFamily = FontFamily.Serif // Adding a touch of elegance with serif
+            )
         }
     }
 }
@@ -230,5 +227,5 @@ fun QuickActionsSection(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun DashboardScreenPreview() {
-    DashboardScreen(navController = rememberNavController())
+    DashboardScreen(rememberNavController())
 }

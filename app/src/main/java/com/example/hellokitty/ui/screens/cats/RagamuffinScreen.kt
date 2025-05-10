@@ -1,23 +1,9 @@
 package com.example.hellokitty.ui.screens.cats
 
-
-import android.content.Intent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -25,59 +11,35 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.ui.theme.Cyan
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RagamuffinScreen(navController: NavController){
-
-    //Scaffold
-
+fun RagamuffinScreen(navController: NavController) {
     var selectedIndex by remember { mutableStateOf(0) }
+    var showAdoptDialog by remember { mutableStateOf(false) }
 
     Scaffold(
-        //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("Ragamuffin", color = Color.Black) },
+                title = { Text("Adopt a Ragamuffin", color = Color.Black) },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle back/nav */ }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
@@ -88,12 +50,8 @@ fun RagamuffinScreen(navController: NavController){
                 )
             )
         },
-
-        //BottomBar
         bottomBar = {
-            NavigationBar(
-                containerColor = Cyan
-            ) {
+            NavigationBar(containerColor = Cyan) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Black) },
                     label = { Text("Home") },
@@ -107,315 +65,184 @@ fun RagamuffinScreen(navController: NavController){
                     icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Black) },
                     label = { Text("Favorites") },
                     selected = selectedIndex == 1,
-                    onClick = {
-                        selectedIndex = 1
-                        // navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { selectedIndex = 1 }
                 )
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black) },
                     label = { Text("Profile") },
                     selected = selectedIndex == 2,
-                    onClick = {
-                        selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { selectedIndex = 2 }
                 )
-
-            }
-        },
-
-        //FloatingActionButton
-        floatingActionButton = {
-
-        },
-        content = { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .padding(paddingValues )
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-
-
-
-                ) {
-
-
-                //Main Contents of the page
-
-
-                Box {
-
-                    Image(
-                        painter = painterResource(R.drawable.img_23),
-                        contentDescription = "anime",
-                        modifier = Modifier.fillMaxWidth().height(490.dp),
-                        contentScale = ContentScale.FillWidth
-                    )
-
-
-
-                    //card
-                    Card (modifier = Modifier
-                        .fillMaxWidth()
-                        .align(alignment = Alignment.BottomCenter)
-                        .offset(y = 360.dp)
-                        .clip(shape = RoundedCornerShape(30.dp)),
-                        colors = CardDefaults.cardColors(Color.White)
-
-
-                    ){
-                        Column (
-                            modifier = Modifier.fillMaxSize().padding(start = 20.dp,end = 20.dp),
-
-
-
-
-
-                            ) {
-                            //row
-                            Row {
-
-                                Spacer(modifier = Modifier.height(10.dp))
-
-
-                                Text(
-                                    text = "Ragamuffin Cat",
-                                    fontSize = 30.sp,
-                                    fontFamily = FontFamily.Monospace,
-                                    fontWeight = FontWeight.Bold,
-                                    color = Color.Black
-
-
-
-
-                                )
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-
-                                Text(text = "120$", color = Color.Magenta, fontSize = 30.sp)
-
-
-
-
-
-                            }
-                            //end row
-
-//row 2
-                            Row {
-
-                                Spacer(modifier = Modifier.height(30.dp))
-
-
-                                //Card-1
-                                Card(modifier = Modifier
-                                    .width(100.dp)
-                                    .height(100.dp)
-                                    .padding(start = 10.dp),
-                                    colors = CardDefaults.cardColors(Cyan)
-
-                                )
-
-                                {
-                                    Column(
-                                        modifier = Modifier.fillMaxSize(),
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center,
-
-                                        ) {
-
-
-                                        Text(text ="Age", fontSize = 20.sp, color = Color.Red)
-
-                                        Spacer(modifier = Modifier.height(10.dp))
-
-                                        Text(text ="1.5yrs", fontSize = 20.sp, color = Color.Black)
-
-
-
-
-                                    }
-
-
-                                }
-                                //End of Card-1
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-                                //Card-2
-                                Card(modifier = Modifier
-                                    .width(100.dp)
-                                    .height(100.dp)
-                                    .padding(start = 10.dp),
-                                    colors = CardDefaults.cardColors(Cyan)
-
-                                )
-
-                                {
-                                    Column(
-                                        modifier = Modifier.fillMaxSize(),
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center,
-
-                                        ) {
-
-
-                                        Text(text ="Sex", fontSize = 20.sp, color = Color.Red)
-
-                                        Spacer(modifier = Modifier.height(10.dp))
-
-                                        Text(text ="Female", fontSize = 20.sp, color = Color.Black)
-
-
-
-
-                                    }
-
-
-                                }
-                                //End of Card-2
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-
-                                //Card-1
-                                Card(modifier = Modifier
-                                    .width(100.dp)
-                                    .height(100.dp)
-                                    .padding(start = 10.dp),
-                                    colors = CardDefaults.cardColors(Cyan)
-
-                                )
-
-                                {
-                                    Column(
-                                        modifier = Modifier.fillMaxSize(),
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center,
-
-                                        ) {
-
-
-                                        Text(text ="Color", fontSize = 20.sp, color = Color.Red)
-
-                                        Spacer(modifier = Modifier.height(10.dp))
-
-                                        Text(text ="Mixed", fontSize = 20.sp, color = Color.Black)
-
-
-
-
-                                    }
-
-
-                                }
-                                //End of Card-1
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-                            //end of row2
-
-
-                            Spacer(modifier = Modifier.height(20.dp))
-
-
-                            Text(text = "The Ragamuffin is a breed of domestic cat. It was once considered to be a variant of the Ragdoll cat but was established as a separate breed in 1994. Ragamuffins are notable for their friendly personalities and thick fur."
-                            )
-
-
-                            Spacer(modifier = Modifier.height(20.dp))
-
-
-
-                            Button(
-                                onClick = {
-
-                                },
-                                colors = ButtonDefaults.buttonColors(Color.LightGray),
-                                shape = RoundedCornerShape(500.dp),
-                                modifier = Modifier.fillMaxWidth().size(100.dp)
-                            ) {
-
-                                Image(
-                                    painter = painterResource(R.drawable.img_29),
-                                    contentDescription = "Ecommerce",
-                                    modifier = Modifier.size(90.dp)
-                                )
-
-                                Spacer(modifier = Modifier.width(20.dp))
-
-                                Text(
-                                    text = "Adopt Now",
-                                    color = Color.Black,
-                                    fontSize = 20.sp,
-
-                                    )
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-                        }
-
-
-
-
-
-                    }
-                    //end card
-
-                }
-
-
-
-
-
-
-
-
-
             }
         }
-    )
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize()
+                .background(Color(0xFFFFF8F2))
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                painter = painterResource(R.drawable.img_23),
+                contentDescription = "Ragamuffin Cat",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(400.dp),
+                contentScale = ContentScale.Crop
+            )
 
-    //End of scaffold
+            // "Floating" card effect using offset only (no negative padding)
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .offset(y = (-20).dp),
+                shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
+                colors = CardDefaults.cardColors(Color.White),
+                elevation = CardDefaults.cardElevation(16.dp)
+            ) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp, vertical = 20.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceAround
+                    ) {
+                        Text(
+                            text = "Ragamuffin Cat",
+                            fontSize = 28.sp,
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.Black
+                        )
+                        Text(
+                            text = "$120",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFFFF69B4)
+                        )
+                    }
 
+                    Spacer(modifier = Modifier.height(16.dp))
 
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        DetailCard("Age", "1.5 yrs")
+                        DetailCard("Sex", "Female")
+                        DetailCard("Color", "Mixed")
+                    }
 
+                    Spacer(modifier = Modifier.height(24.dp))
 
+                    Text(
+                        text = "About Me",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = Color.Black
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "Ragamuffins are affectionate lap cats known for their luxurious fur and gentle demeanor. Great with kids and other pets — she’s a total sweetheart with a plushy soul.",
+                        fontSize = 16.sp,
+                        color = Color.DarkGray
+                    )
 
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "Adoption includes vaccinations, microchipping, and a starter kit.",
+                        fontSize = 14.sp,
+                        color = Color.Gray
+                    )
 
+                    Spacer(modifier = Modifier.height(24.dp))
+
+                    Text(
+                        text = "Adoption Requirements",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        color = Color.Black
+                    )
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "• Must have a safe home environment\n• Commitment to a lifetime of care\n• Financial capability to support pet needs",
+                        fontSize = 14.sp,
+                        color = Color.DarkGray
+                    )
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(
+                        onClick = { showAdoptDialog = true },
+                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF4BBA7)),
+                        shape = RoundedCornerShape(50.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(60.dp)
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        Text(
+                            text = "Adopt Me",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
+
+            if (showAdoptDialog) {
+                AlertDialog(
+                    onDismissRequest = { showAdoptDialog = false },
+                    title = { Text("Adopt a Ragamuffin") },
+                    text = { Text("Are you sure you want to adopt this Ragamuffin?") },
+                    confirmButton = {
+                        TextButton(onClick = {
+                            showAdoptDialog = false
+                        }) {
+                            Text("Confirm")
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(onClick = { showAdoptDialog = false }) {
+                            Text("Cancel")
+                        }
+                    }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun DetailCard(label: String, value: String) {
+    Card(
+        modifier = Modifier
+            .width(100.dp)
+            .height(100.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFFEBEE)),
+        shape = RoundedCornerShape(16.dp),
+        elevation = CardDefaults.cardElevation(6.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = label, color = Color(0xFFEC407A), fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
+            Spacer(modifier = Modifier.height(6.dp))
+            Text(text = value, color = Color.Black, fontSize = 16.sp)
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun RagamuffinScreenPreview(){
-    RagamuffinScreen(navController= rememberNavController())
+fun RagamuffinScreenPreview() {
+    RagamuffinScreen(navController = rememberNavController())
 }
