@@ -16,3 +16,16 @@ const val ROUT_MPESA = "mpesa"
 const val ROUT_PAYMENT = "payment"
 const val ROUT_CONTACT= "contact"
 const val ROUT_DASHBOARD= "dashboard"
+
+
+//Products
+
+const val ROUT_ADD_PRODUCT = "add_product"
+const val ROUT_PRODUCT_LIST = "product_list"
+const val ROUT_EDIT_PRODUCT = "edit_product/{productId}"
+
+// ✅ Helper function for navigation
+fun editProductRoute(productId: Int) = "edit_product/$productId"
+
+
+

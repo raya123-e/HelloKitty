@@ -127,7 +127,7 @@ fun CatCareScreen(navController: NavController) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Image(
-                        painter = painterResource(R.drawable.img_14),
+                        painter = painterResource(R.drawable.catcare),
                         contentDescription = "Featured Cat Health Tip",
                         modifier = Modifier
                             .fillMaxWidth()
@@ -140,12 +140,12 @@ fun CatCareScreen(navController: NavController) {
                     Spacer(modifier = Modifier.height(24.dp))
 
                     val vetTips = listOf(
-                        Triple("🧼 Grooming Routine", "Brushing 3x a week prevents hairballs & mats.", R.drawable.img_17),
-                        Triple("💧 Hydration Alert", "Ensure constant access to clean water.", R.drawable.img_18),
-                        Triple("🦷 Dental Check", "Cats need dental care too—try enzymatic toothpaste!", R.drawable.img_19),
-                        Triple("🧪 Vaccination Time", "Stay up to date to avoid sneaky infections.", R.drawable.img_20),
-                        Triple("🍗 Healthy Diet", "Balanced meals mean better coats & fewer vet trips.", R.drawable.img_21),
-                        Triple("🧸 Enrichment Matters", "Feather toys & puzzles prevent boredom blues.", R.drawable.img_22)
+                        Triple("🧼 Grooming Routine", "Brushing 3x a week prevents hairballs & mats.", R.drawable.img_44),
+                        Triple("💧 Hydration Alert", "Ensure constant access to clean water.", R.drawable.img_45),
+                        Triple("🦷 Dental Check", "Cats need dental care too—try enzymatic toothpaste!", R.drawable.img_47),
+                        Triple("🧪 Vaccination Time", "Stay up to date to avoid sneaky infections.", R.drawable.img_48),
+                        Triple("🍗 Healthy Diet", "Balanced meals mean better coats & fewer vet trips.", R.drawable.img_49),
+                        Triple("🧸 Enrichment Matters", "Feather toys & puzzles prevent boredom blues.", R.drawable.img_50)
                     )
 
                     vetTips.forEach { (title, description, imageRes) ->
