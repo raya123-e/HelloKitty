@@ -66,7 +66,7 @@ fun EditProductScreen(productId: Int?, navController: NavController, viewModel: 
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigate(ROUT_ADD_PRODUCT) }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },

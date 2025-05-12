@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
+import com.example.hellokitty.navigation.ROUT_DASHBOARD
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.navigation.ROUT_PAYMENT
 import com.example.hellokitty.ui.theme.Cyan
@@ -42,7 +43,7 @@ fun MaineCoonScreen(navController: NavController) {
             TopAppBar(
                 title = { Text("Adopt Me: Maine Coon", color = Color.Black) },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigate(ROUT_HOME) }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 },
@@ -57,7 +58,7 @@ fun MaineCoonScreen(navController: NavController) {
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0
-                        navController.navigate(ROUT_HOME)
+                        navController.navigate(ROUT_DASHBOARD)
                     }
                 )
                 NavigationBarItem(

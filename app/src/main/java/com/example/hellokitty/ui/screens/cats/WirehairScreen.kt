@@ -59,6 +59,7 @@ import androidx.core.net.toUri
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
+import com.example.hellokitty.navigation.ROUT_DASHBOARD
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.ui.theme.Cyan
 
@@ -77,7 +78,7 @@ fun WirehairScreen(navController: NavController){
             TopAppBar(
                 title = { Text(" American Wirehair", color = Color.Black) },
                 navigationIcon = {
-                    IconButton(onClick = { /* Handle back/nav */ }) {
+                    IconButton(onClick = { navController.navigate(ROUT_HOME)}) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
@@ -100,7 +101,7 @@ fun WirehairScreen(navController: NavController){
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0
-                        navController.navigate(ROUT_HOME)
+                        navController.navigate(ROUT_DASHBOARD)
                     }
                 )
                 NavigationBarItem(

@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
+import com.example.hellokitty.navigation.ROUT_DASHBOARD
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.ui.theme.Cyan
 
@@ -62,7 +63,7 @@ fun ContactScreen(navController: NavController) {
                         selected = isSelected,
                         onClick = {
                             selectedIndex = index
-                            if (index == 0) navController.navigate(ROUT_HOME)
+                            if (index == 0) navController.navigate(ROUT_DASHBOARD)
                             // Add more navigation logic here
                         }
                     )

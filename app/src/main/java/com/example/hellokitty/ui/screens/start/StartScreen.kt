@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
+import com.example.hellokitty.navigation.ROUT_DASHBOARD
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.ui.theme.Cyan
 
@@ -105,7 +106,7 @@ fun StartScreen(navController: NavController) {
 
         // CTA Button
         Button(
-            onClick = { navController.navigate(ROUT_HOME) },
+            onClick = { navController.navigate(ROUT_DASHBOARD) },
             colors = ButtonDefaults.buttonColors(containerColor = Cyan),
             shape = RoundedCornerShape(50.dp),
             elevation = ButtonDefaults.buttonElevation(defaultElevation = 6.dp),

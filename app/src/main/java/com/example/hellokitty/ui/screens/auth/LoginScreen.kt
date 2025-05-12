@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.hellokitty.R
+import com.example.hellokitty.navigation.ROUT_DASHBOARD
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.navigation.ROUT_REGISTER
 import com.example.hellokitty.navigation.ROUT_START
@@ -58,7 +59,7 @@ fun LoginScreen(
                 Toast.makeText(context, "Invalid Credentials", Toast.LENGTH_SHORT).show()
             } else {
                 if (user.role == "admin") {
-                    navController.navigate(ROUT_HOME)
+                    navController.navigate(ROUT_DASHBOARD)
                 } else {
                     navController.navigate(ROUT_START)
                 }

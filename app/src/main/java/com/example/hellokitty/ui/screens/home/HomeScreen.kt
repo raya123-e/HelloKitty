@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -70,7 +71,7 @@ fun HomeScreen(navController: NavController) {
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0
-                        navController.navigate(ROUT_HOME)
+                        navController.navigate(ROUT_DASHBOARD)
                     }
                 )
                 NavigationBarItem(
@@ -83,7 +84,7 @@ fun HomeScreen(navController: NavController) {
                     }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
+                    icon = { Icon(Icons.Default.Lock, contentDescription = "Profile") },
                     label = { Text("Profile") },
                     selected = selectedIndex == 2,
                     onClick = {
@@ -128,8 +129,8 @@ fun HomeScreen(navController: NavController) {
                         Triple("Ragdoll", R.drawable.ragdoll, ROUT_RAGDOLL),
                         Triple("Persian", R.drawable.img_21, ROUT_PERSIAN),
                         Triple("Ragamuffin", R.drawable.img_23, ROUT_RAGAMUFFIN),
-                        Triple("Wirehair", R.drawable.img_37, ROUT_WIREHAIR),
-                        Triple("About", R.drawable.img_17, ROUT_MAINECOON)
+                        Triple("Wirehair", R.drawable.img_31, ROUT_WIREHAIR),
+                        Triple("MaineCoon", R.drawable.img_30, ROUT_MAINECOON)
                     )
 
                     items(featuredPets.size) { index ->

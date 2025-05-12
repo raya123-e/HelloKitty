@@ -29,6 +29,7 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.example.hellokitty.R
 import com.example.hellokitty.navigation.ROUT_ADD_PRODUCT
+import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.navigation.ROUT_PRODUCT_LIST
 import com.example.hellokitty.viewmodel.ProductViewModel
 
@@ -63,7 +64,7 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
                 },
                 colors = TopAppBarDefaults.mediumTopAppBarColors(containerColor = Color(0xFFFFE5EC)),
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigate(ROUT_HOME) }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },

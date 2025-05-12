@@ -32,6 +32,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
 import com.example.hellokitty.navigation.ROUT_CARD
+import com.example.hellokitty.navigation.ROUT_DASHBOARD
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.navigation.ROUT_MPESA
 import kotlinx.coroutines.delay
@@ -46,7 +47,7 @@ fun PaymentScreen(navController: NavController) {
             TopAppBar(
                 title = { Text("Payment", color = Color.Black) },
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
+                    IconButton(onClick = { navController.navigate(ROUT_HOME) }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.Black)
                     }
                 },
@@ -63,7 +64,7 @@ fun PaymentScreen(navController: NavController) {
                     selected = selectedIndex == 0,
                     onClick = {
                         selectedIndex = 0
-                        navController.navigate(ROUT_HOME)
+                        navController.navigate(ROUT_DASHBOARD)
                     }
                 )
                 NavigationBarItem(
