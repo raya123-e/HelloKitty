@@ -153,7 +153,7 @@ fun HomeScreen(navController: NavController) {
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     CategoryChip("Vet") { navController.navigate(ROUT_VET) }
-                    CategoryChip("Post Your Cat") { navController.navigate(ROUT_PRODUCT_LIST) }
+                    CategoryChip("Post Your Cat") { navController.navigate(ROUT_ADD_PRODUCT) }
                     CategoryChip("Cat Care") { navController.navigate(ROUT_CATCARE) }
                     CategoryChip("Donation") { navController.navigate(ROUT_PAYMENT) }
                 }
