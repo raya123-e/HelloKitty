@@ -16,6 +16,8 @@ const val ROUT_MPESA = "mpesa"
 const val ROUT_PAYMENT = "payment"
 const val ROUT_CONTACT= "contact"
 const val ROUT_DASHBOARD= "dashboard"
+const val ROUT_CATCARE= "catcare"
+const val ROUT_VET= "vet"
 
 
 //Products

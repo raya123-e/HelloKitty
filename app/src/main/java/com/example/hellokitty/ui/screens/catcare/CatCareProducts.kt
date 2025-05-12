@@ -241,6 +241,6 @@ fun CatCareScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun CatCarePreview() {
+fun CatCareScreenPreview() {
     CatCareScreen(rememberNavController())
 }

@@ -18,10 +18,12 @@ import com.example.hellokitty.ui.screens.products.ProductListScreen
 import com.example.hellokitty.ui.screens.dashboard.DashboardScreen
 import com.example.hellokitty.data.UserDatabase
 import com.example.hellokitty.repository.UserRepository
+import com.example.hellokitty.ui.screen.vetscreen.VetScreen
 import com.example.hellokitty.ui.screens.about.AboutScreen
 import com.example.hellokitty.ui.screens.auth.LoginScreen
 import com.example.hellokitty.ui.screens.auth.RegisterScreen
 import com.example.hellokitty.ui.screens.card.CardScreen
+import com.example.hellokitty.ui.screens.catcare.CatCareScreen
 import com.example.hellokitty.ui.screens.cats.MaineCoonScreen
 import com.example.hellokitty.ui.screens.cats.PersianScreen
 import com.example.hellokitty.ui.screens.cats.RagamuffinScreen
@@ -42,7 +44,7 @@ import com.example.hellokitty.viewmodel.ProductViewModel
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ROUT_ADD_PRODUCT,
+    startDestination: String = ROUT_SPLASH,
     productViewModel: ProductViewModel = viewModel(),
 
     ) {
@@ -156,6 +158,16 @@ fun AppNavHost(
             if (productId != null) {
                 EditProductScreen(productId, navController, productViewModel)
             }
+        }
+
+
+        composable(ROUT_CATCARE) {
+            CatCareScreen(navController)
+        }
+
+
+        composable(ROUT_VET) {
+            VetScreen(navController)
         }
 
 

@@ -139,7 +139,7 @@ fun HomeScreen(navController: NavController) {
                 }
 
                 Text(
-                    text = "Cat Categories",
+                    text = "Available Services",
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(start = 16.dp, top = 16.dp)
@@ -151,11 +151,12 @@ fun HomeScreen(navController: NavController) {
                         .padding(top = 8.dp),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    CategoryChip("Persian")
-                    CategoryChip("Ragdoll")
-                    CategoryChip("Ragamuffin")
-                    CategoryChip("Wirehair")
+                    CategoryChip("Vet") { navController.navigate(ROUT_VET) }
+                    CategoryChip("Post Your Cat") { navController.navigate(ROUT_PRODUCT_LIST) }
+                    CategoryChip("Cat Care") { navController.navigate(ROUT_CATCARE) }
+                    CategoryChip("Donation") { navController.navigate(ROUT_PAYMENT) }
                 }
+
 
                 Text(
                     text = "Adoption Tips",
@@ -236,22 +237,24 @@ fun PetCard(petName: String, petImage: Int, navController: NavController, route:
     }
 }
 
+
 @Composable
-fun CategoryChip(categoryName: String) {
+fun CategoryChip(categoryName: String, onClick: () -> Unit) {
     Surface(
         modifier = Modifier
             .padding(4.dp)
-            .clickable { },
+            .clickable { onClick() },
         shape = RoundedCornerShape(20.dp),
         color = Cyan
     ) {
         Text(
             text = categoryName,
-            color = Color.White,
+            color = Color.Black,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

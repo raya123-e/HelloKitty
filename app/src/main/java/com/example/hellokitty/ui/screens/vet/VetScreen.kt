@@ -36,7 +36,7 @@ import com.example.hellokitty.ui.theme.Cyan
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CatCareScreen(navController: NavController) {
+fun VetScreen(navController: NavController) {
     var selectedIndex by remember { mutableStateOf(0) }
 
     val mContext = LocalContext.current
@@ -127,11 +127,11 @@ fun CatCareScreen(navController: NavController) {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Image(
-                        painter = painterResource(R.drawable.catcare),
+                        painter = painterResource(R.drawable.img_51),
                         contentDescription = "Featured Cat Health Tip",
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(200.dp)
+                            .height(300.dp)
                             .padding(horizontal = 16.dp)
                             .clip(RoundedCornerShape(20.dp)),
                         contentScale = ContentScale.Crop
@@ -195,7 +195,7 @@ fun CatCareScreen(navController: NavController) {
                                     Button(
                                         onClick = {
                                             val callIntent = Intent(Intent.ACTION_DIAL)
-                                            callIntent.data = "tel:0720245837".toUri()
+                                            callIntent.data = "tel:0117434950".toUri()
                                             mContext.startActivity(callIntent)
                                         },
                                         shape = RoundedCornerShape(50),
@@ -222,6 +222,6 @@ fun CatCareScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun CatCarePreview() {
-    CatCareScreen(rememberNavController())
+fun VetScreenPreview() {
+    VetScreen(rememberNavController())
 }
