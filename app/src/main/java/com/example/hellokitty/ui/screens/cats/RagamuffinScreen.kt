@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.hellokitty.R
 import com.example.hellokitty.navigation.ROUT_DASHBOARD
 import com.example.hellokitty.navigation.ROUT_HOME
+import com.example.hellokitty.navigation.ROUT_PAYMENT
 import com.example.hellokitty.ui.theme.Cyan
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,18 +63,7 @@ fun RagamuffinScreen(navController: NavController) {
                         navController.navigate(ROUT_DASHBOARD)
                     }
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Black) },
-                    label = { Text("Favorites") },
-                    selected = selectedIndex == 1,
-                    onClick = { selectedIndex = 1 }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black) },
-                    label = { Text("Profile") },
-                    selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2 }
-                )
+
             }
         }
     ) { paddingValues ->
@@ -205,6 +195,7 @@ fun RagamuffinScreen(navController: NavController) {
                             showAdoptDialog = false
                         }) {
                             Text("Confirm")
+                            navController.navigate(ROUT_PAYMENT)
                         }
                     },
                     dismissButton = {

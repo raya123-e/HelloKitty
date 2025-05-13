@@ -17,6 +17,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
@@ -36,6 +37,7 @@ import com.example.hellokitty.navigation.ROUT_DASHBOARD
 import com.example.hellokitty.navigation.ROUT_HOME
 import com.example.hellokitty.navigation.ROUT_MPESA
 import kotlinx.coroutines.delay
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PaymentScreen(navController: NavController) {
@@ -45,15 +47,20 @@ fun PaymentScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Payment", color = Color.Black) },
+                title = {
+                    Text(
+                        "Payment",
+                        color = Color.Black,
+                        fontSize = 22.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(ROUT_HOME) }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.Black)
                     }
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFFF4BBA7)
-                )
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFF4BBA7))
             )
         },
         bottomBar = {
@@ -67,18 +74,7 @@ fun PaymentScreen(navController: NavController) {
                         navController.navigate(ROUT_DASHBOARD)
                     }
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
-                    label = { Text("Favorites") },
-                    selected = selectedIndex == 1,
-                    onClick = { selectedIndex = 1 }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                    label = { Text("Profile") },
-                    selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2 }
-                )
+
             }
         },
         containerColor = Color.Transparent,
@@ -88,7 +84,11 @@ fun PaymentScreen(navController: NavController) {
                     .fillMaxSize()
                     .background(
                         Brush.verticalGradient(
-                            colors = listOf(Color(0xFFF7E4FF), Color(0xFFF2C1F3))
+                            colors = listOf(
+                                Color(0xFFFFE4EC), // light baby pink
+                                Color(0xFFF8BBD0), // blossom blush
+                                Color(0xFFF4BBA7)  // base theme
+                            )
                         )
                     )
                     .padding(paddingValues)
@@ -98,27 +98,29 @@ fun PaymentScreen(navController: NavController) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     AnimatedVisibility(
                         visible = true,
-                        enter = fadeIn(animationSpec = tween(800)) + slideInVertically(tween(800)),
+                        enter = fadeIn(tween(1000)) + slideInVertically(tween(1000)),
                     ) {
                         Image(
                             painter = painterResource(R.drawable.img_33),
-                            contentDescription = "Hello Kitty Background",
+                            contentDescription = "Hello Kitty Header",
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(180.dp)
-                                .clip(RoundedCornerShape(16.dp)),
+                                .clip(RoundedCornerShape(20.dp)),
                             contentScale = ContentScale.Crop
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(30.dp))
+                    Spacer(modifier = Modifier.height(28.dp))
 
                     Text(
                         text = "Choose Your Payment Method",
-                        fontSize = 24.sp,
+                        fontSize = 26.sp,
                         fontWeight = FontWeight.ExtraBold,
-                        color = Color(0xFF333333),
-                        modifier = Modifier.padding(bottom = 16.dp)
+                        color = Color(0xFF4B2E83),
+                        modifier = Modifier
+                            .padding(bottom = 20.dp)
+                            .alpha(0.95f)
                     )
 
                     AnimatedPaymentButton(
@@ -141,13 +143,17 @@ fun PaymentScreen(navController: NavController) {
                         icon = painterResource(R.drawable.img_34)
                     )
 
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
                     Text(
-                        text = "By adopting Mr. Fluffy, you're not just gaining a companion — you're giving a home to a sweet soul in need. All cats are vet-checked, vaccinated, and come with a starter kit including food, a cozy blanket, and a toy mouse to keep them playful.",
+                        text = "💖 By adopting Mr. Fluffy, you're not just gaining a bestie — you're giving a home to a soul who just wants to nap in a sunbeam. All cats are vet-checked, vaccinated, and come with a starter kit: cozy blanket, food, and a toy mouse for ultimate zoomies.",
                         fontSize = 16.sp,
+                        fontWeight = FontWeight.Medium,
                         color = Color.DarkGray,
-                        modifier = Modifier.padding(horizontal = 8.dp)
+                        lineHeight = 22.sp,
+                        modifier = Modifier
+                            .padding(horizontal = 12.dp)
+                            .alpha(0.9f)
                     )
                 }
             }
@@ -161,12 +167,12 @@ fun AnimatedPaymentButton(label: String, onClick: () -> Unit, icon: Painter) {
 
     LaunchedEffect(pressed) {
         if (pressed) {
-            delay(100L)
+            delay(80L)
             pressed = false
         }
     }
 
-    val scale = animateFloatAsState(targetValue = if (pressed) 0.96f else 1f)
+    val scale = animateFloatAsState(targetValue = if (pressed) 0.97f else 1f)
 
     Card(
         modifier = Modifier
@@ -177,37 +183,34 @@ fun AnimatedPaymentButton(label: String, onClick: () -> Unit, icon: Painter) {
                 pressed = true
                 onClick()
             },
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFF4BBA7)),
-        shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(8.dp)
+        shape = RoundedCornerShape(22.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFDE0DC)),
+        elevation = CardDefaults.cardElevation(10.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
+                .padding(horizontal = 20.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
                 painter = icon,
                 contentDescription = "$label Icon",
-                modifier = Modifier.size(40.dp)
+                modifier = Modifier.size(36.dp)
             )
-            Spacer(modifier = Modifier.width(16.dp))
+            Spacer(modifier = Modifier.width(20.dp))
             Text(
                 text = label,
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color(0xFF333333)
+                color = Color(0xFF4A148C)
             )
         }
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun PaymentScreenPreview() {
     PaymentScreen(navController = rememberNavController())
 }
-

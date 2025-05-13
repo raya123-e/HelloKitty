@@ -68,18 +68,7 @@ fun CardScreen(navController: NavController, catName: String = "Princess Whisker
                         navController.navigate(ROUT_DASHBOARD)
                     }
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
-                    label = { Text("Favorites") },
-                    selected = selectedIndex == 1,
-                    onClick = { selectedIndex = 1 }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                    label = { Text("Profile") },
-                    selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2 }
-                )
+
             }
         },
         content = { paddingValues ->

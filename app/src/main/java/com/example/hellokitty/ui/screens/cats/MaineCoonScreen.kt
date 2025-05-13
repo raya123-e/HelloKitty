@@ -61,24 +61,7 @@ fun MaineCoonScreen(navController: NavController) {
                         navController.navigate(ROUT_DASHBOARD)
                     }
                 )
-                NavigationBarItem(
-                    icon = {
-                        Icon(
-                            Icons.Default.Favorite,
-                            contentDescription = "Favorites",
-                            tint = if (isFavorite) Color.Red else Color.Black
-                        )
-                    },
-                    label = { Text("Favorites") },
-                    selected = selectedIndex == 1,
-                    onClick = { isFavorite = !isFavorite }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black) },
-                    label = { Text("Profile") },
-                    selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2 }
-                )
+
             }
         }
     ) { paddingValues ->

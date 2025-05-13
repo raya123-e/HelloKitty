@@ -1,6 +1,5 @@
 package com.example.hellokitty.ui.screens.auth
 
-import android.media.MediaPlayer
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.RepeatMode
@@ -69,7 +68,7 @@ fun LoginScreen(
 
     Column(
         modifier = Modifier
-            .paint(painter = painterResource(R.drawable.img_16), contentScale = ContentScale.FillBounds)
+            .paint(painter = painterResource(R.drawable.img_56), contentScale = ContentScale.FillBounds)
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
@@ -83,7 +82,7 @@ fun LoginScreen(
             text = "Welcome Back, Cat Lover!",
             fontSize = 36.sp,
             fontFamily = FontFamily.Cursive,
-            color = Color(0xFF8B5E83)
+            color = Color.White
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -168,7 +167,7 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         TextButton(onClick = { navController.navigate(ROUT_REGISTER) }) {
-            Text("Don't have an account? Register", color = Color.Black)
+            Text("Don't have an account? Register", color = Color.White)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -177,7 +176,7 @@ fun LoginScreen(
             Text(
                 text = "✨ Did you know? Cats sleep for 70% of their lives.",
                 fontSize = 14.sp,
-                color = Color(0xFF8B5E83)
+                color = Color.White
             )
         }
     }

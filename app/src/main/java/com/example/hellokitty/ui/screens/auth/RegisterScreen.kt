@@ -1,12 +1,8 @@
 package com.example.hellokitty.ui.screens.auth
 
 import android.widget.Toast
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
+import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -19,16 +15,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.paint
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.*
 import androidx.navigation.NavController
 import com.example.hellokitty.R
 import com.example.hellokitty.model.User
@@ -47,195 +41,160 @@ fun RegisterScreen(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var confirmPassword by remember { mutableStateOf("") }
+    var receiveUpdates by remember { mutableStateOf(true) }
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
+    var role by remember { mutableStateOf("User") }
+    val roleOptions = listOf("User", "Admin")
+    var roleExpanded by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val animatedAlpha by animateFloatAsState(
+
+    val shimmerAlpha by rememberInfiniteTransition().animateFloat(
+        initialValue = 0.3f,
         targetValue = 1f,
-        animationSpec = tween(durationMillis = 1500, easing = LinearEasing),
-        label = "Animated Alpha"
+        animationSpec = infiniteRepeatable(
+            animation = tween(1200, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        )
     )
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .paint(painter = painterResource(R.drawable.img_18), contentScale = ContentScale.FillBounds)
-
+            .paint(
+                painter = painterResource(R.drawable.img_18),
+                contentScale = ContentScale.Crop
+            )
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = Modifier.height(8.dp))
-        AnimatedVisibility(visible = true, enter = fadeIn(), exit = fadeOut()) {
-            Text(
-                "Create Your Account",
-                fontSize = 40.sp,
-                fontFamily = FontFamily.Cursive
-            )
-        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            "Sign Up for Purrfection 🐱",
+            fontSize = 34.sp,
+            fontWeight = FontWeight.Bold,
+            fontFamily = FontFamily.Cursive,
+            color = Color.White,
+            modifier = Modifier.alpha(shimmerAlpha)
+        )
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        //Username
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
             label = { Text("Username", color = Color.Black) },
-            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "Username Icon" , tint = Color.Black) },
-
-
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = Color.Black,
-                focusedBorderColor = Color.Cyan,
-                focusedTextColor = Color.Cyan,
-                cursorColor = Color.White,
-
-
-
-                ),
+            leadingIcon = { Icon(Icons.Default.Person, contentDescription = null, tint = Color.Black) },
             modifier = Modifier.fillMaxWidth()
         )
-        //End of username
-
-
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        //Email
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Email", color = Color.Black) },
-            leadingIcon = { Icon(Icons.Filled.Email, contentDescription = "Email Icon",tint = Color.Black) },
+            label = { Text("Email" , color = Color.Black) },
+            leadingIcon = { Icon(Icons.Default.Email, contentDescription = null, tint = Color.Black) },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = Color.Black,
-                focusedBorderColor = Color.Cyan,
-                focusedTextColor = Color.Cyan,
-                cursorColor = Color.White,
-
-
-
-                ),
-
             modifier = Modifier.fillMaxWidth()
         )
-        //End of email
 
         Spacer(modifier = Modifier.height(8.dp))
 
-
-        //Role
-        var role by remember { mutableStateOf("User") }
-        val roleOptions = listOf("user", "Admin")
-        var expanded by remember { mutableStateOf(false) }
-
         ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = { expanded = !expanded }
+            expanded = roleExpanded,
+            onExpandedChange = { roleExpanded = !roleExpanded }
         ) {
             OutlinedTextField(
                 value = role,
                 onValueChange = {},
                 readOnly = true,
                 label = { Text("Select Role", color = Color.Black) },
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                colors = OutlinedTextFieldDefaults.colors(
-                    unfocusedBorderColor = Color.Black,
-                    focusedBorderColor = Color.Cyan,
-                    focusedTextColor = Color.Cyan,
-
-
-                    ),
-                modifier = Modifier.menuAnchor().fillMaxWidth(),
-
-
-                )
+                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = roleExpanded) },
+                modifier = Modifier.menuAnchor().fillMaxWidth()
+            )
             ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
+                expanded = roleExpanded,
+                onDismissRequest = { roleExpanded = false }
             ) {
                 roleOptions.forEach { selectionOption ->
                     DropdownMenuItem(
                         text = { Text(selectionOption) },
                         onClick = {
                             role = selectionOption
-                            expanded = false
+                            roleExpanded = false
                         }
                     )
                 }
             }
         }
-        //End of role
 
+        Spacer(modifier = Modifier.height(8.dp))
 
-
-
-
-
-        // Password Input Field with Show/Hide Toggle
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
             label = { Text("Password", color = Color.Black) },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Password Icon",tint = Color.Black) },
+            leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
             trailingIcon = {
-                val image = if (passwordVisible) painterResource(R.drawable.visibility)  else painterResource(
-                    R.drawable.visibilityoff
-                )
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
-                    Icon(image, contentDescription = if (passwordVisible) "Hide Password" else "Show Password",tint = Color.Black)
+                    Icon(
+                        painter = painterResource(
+                            if (passwordVisible) R.drawable.visibility else R.drawable.visibilityoff
+                        ),
+                        contentDescription = null, tint = Color.Black
+                    )
                 }
             },
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = Color.Black,
-                focusedBorderColor = Color.Cyan,
-                focusedTextColor = Color.Cyan,
-
-
-                ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Confirm Password Input Field with Show/Hide Toggle
         OutlinedTextField(
             value = confirmPassword,
             onValueChange = { confirmPassword = it },
-            label = { Text("Confirm Password", color =Color.Black ) },
+            label = { Text("Confirm Password", color = Color.Black) },
             visualTransformation = if (confirmPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Confirm Password Icon",tint = Color.Black) },
+            leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null) },
             trailingIcon = {
-                val image = if (confirmPasswordVisible) painterResource(R.drawable.visibility)  else painterResource(R.drawable.visibilityoff)
                 IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
-                    Icon(image, contentDescription = if (confirmPasswordVisible) "Hide Password" else "Show Password",tint = Color.Black)
+                    Icon(
+                        painter = painterResource(
+                            if (confirmPasswordVisible) R.drawable.visibility else R.drawable.visibilityoff
+                        ),
+                        contentDescription = null, tint = Color.Black
+                    )
                 }
             },
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = Color.Black,
-                focusedBorderColor = Color.Cyan,
-                focusedTextColor = Color.Cyan,
-
-
-                ),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(5.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Checkbox(checked = receiveUpdates, onCheckedChange = { receiveUpdates = it })
+            Text("I want to receive updates on adoptable cats 🐾", color = Color.White)
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp)
+                .height(55.dp)
                 .background(
                     brush = Brush.horizontalGradient(
-                        colors = listOf(Color(0xFF00C6FF), Color(0xFF0072FF))
+                        listOf(Color(0xFFF4BBA7), Color(0xFFFFC1CC))
                     ),
-                    shape = MaterialTheme.shapes.medium
+                    shape = MaterialTheme.shapes.large
                 ),
             contentAlignment = Alignment.Center
         ) {
@@ -244,25 +203,30 @@ fun RegisterScreen(
                     if (username.isBlank() || email.isBlank() || password.isBlank() || confirmPassword.isBlank()) {
                         Toast.makeText(context, "All fields are required", Toast.LENGTH_SHORT).show()
                     } else if (password != confirmPassword) {
-                        Toast.makeText(context, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Passwords don't match, love 💔", Toast.LENGTH_SHORT).show()
                     } else {
-                        authViewModel.registerUser(User(username = username, email = email, role = role, password = password))
+                        authViewModel.registerUser(
+                            User(username = username, email = email, role = role, password = password)
+                        )
                         onRegisterSuccess()
                     }
                 },
-                modifier = Modifier.fillMaxSize(),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = 0.dp),
+                shape = MaterialTheme.shapes.large,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Text("Register", color = Color.White)
+                Text("Register Meow", color = Color.White, fontWeight = FontWeight.Bold)
             }
         }
 
-        Spacer(modifier = Modifier.height(10.dp))
 
-        TextButton(
-            onClick = { navController.navigate(ROUT_LOGIN) }
-        ) {
-            Text("Already have an account? Login", color =Color.Black )
+        Spacer(modifier = Modifier.height(8.dp))
+
+        TextButton(onClick = { navController.navigate(ROUT_LOGIN) }) {
+            Text("Already have an account? Login", color = Color.White)
         }
+
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }

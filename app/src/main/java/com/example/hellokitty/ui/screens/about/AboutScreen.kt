@@ -1,56 +1,30 @@
 package com.example.hellokitty.ui.screens.about
 
-
-
 import android.content.Intent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Call
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.icons.filled.Share
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,35 +37,28 @@ import com.example.hellokitty.ui.theme.Cyan
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutScreen(navController: NavController){
-
-    //Scaffold
-
+fun AboutScreen(navController: NavController) {
     var selectedIndex by remember { mutableStateOf(0) }
+    val mContext = LocalContext.current
 
     Scaffold(
-        //TopBar
         topBar = {
             TopAppBar(
-                title = { Text("Service") },
+                title = { Text("Welcome to Hello Kitty Adoption") },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigate(ROUT_DASHBOARD) }) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Cyan,
+                    containerColor = Color(0xFFF4BBA7),
                     titleContentColor = Color.Black,
                     navigationIconContentColor = Color.White
                 )
             )
         },
-
-        //BottomBar
         bottomBar = {
-            NavigationBar(
-                containerColor = Cyan
-            ) {
+            NavigationBar(containerColor = Color(0xFFF4BBA7)) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Black) },
                     label = { Text("Home") },
@@ -101,31 +68,8 @@ fun AboutScreen(navController: NavController){
                         navController.navigate(ROUT_DASHBOARD)
                     }
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites", tint = Color.Black) },
-                    label = { Text("Favorites") },
-                    selected = selectedIndex == 1,
-                    onClick = {
-                        selectedIndex = 1
-                        // navController.navigate(ROUT_HOME)
-                    }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile", tint = Color.Black) },
-                    label = { Text("Profile") },
-                    selected = selectedIndex == 2,
-                    onClick = {
-                        selectedIndex = 2
-                        //  navController.navigate(ROUT_HOME)
-                    }
-                )
 
             }
-        },
-
-        //FloatingActionButton
-        floatingActionButton = {
-
         },
         content = { paddingValues ->
             Column(
@@ -134,248 +78,181 @@ fun AboutScreen(navController: NavController){
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
             ) {
-
-
-                //Main Contents of the page
-
-                Spacer(modifier = Modifier.height(20.dp))
-                val mContext = LocalContext.current
-
-                //searchbar
-                var search by remember { mutableStateOf("") }
-                OutlinedTextField(
-                    value = search,
-                    onValueChange = { search = it},
-                    modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp),
-                    leadingIcon = { Icon(imageVector = Icons.Default.Search, contentDescription = "") },
-                    placeholder = { Text(text = "Search......") },
-
-                    )
-
-                //end of searchbar
-
-                Spacer(modifier = Modifier.height(20.dp))
-
+                // Header Image
                 Image(
-                    painter = painterResource(R.drawable.img_14),
-                    contentDescription = "anime",
+                    painter = painterResource(R.drawable.img_54), // Replace with Hello Kitty-themed image
+                    contentDescription = "Hello Kitty Adoption",
                     modifier = Modifier.fillMaxWidth().height(200.dp),
-                    contentScale = ContentScale.FillWidth
+                    contentScale = ContentScale.Crop
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
-                    text = " Services Available",
-                    fontSize = 30.sp,
-                    textAlign = TextAlign.Center,
-                    fontStyle = FontStyle.Italic,
-                    textDecoration = TextDecoration.Underline,
+                    text = "Adopt a Kitty Today! 🐾",
+                    fontSize = 28.sp,
                     fontFamily = FontFamily.SansSerif,
+                    color = Color(0xFF8B5E83),
+                    modifier = Modifier.fillMaxWidth(),
 
-
-
-
-                    )
-                Spacer(modifier = Modifier.height(20.dp))
-
-
-                //Row
-                Row(modifier = Modifier
-                    .padding(start = 20.dp, end = 20.dp)
-
-                ) {
-
-                    Image(
-                        painter = painterResource(R.drawable.img_18),
-                        contentDescription = "",
-                        modifier = Modifier.width(200.dp).height(200.dp).clip(shape = RoundedCornerShape(10.dp)),
-                        contentScale = ContentScale.FillWidth,
-                    )
-                    Spacer(modifier = Modifier.width(20.dp))
-
-                    Column {
-                        Text(
-                            text = "Baddie",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-
-                        Text(
-                            text = "A walking billboard for cool confidence — this hot Korean guy blends effortless style with irresistible charm, making him the perfect face for any bold, trend-setting brand.",
-                            fontSize = 10.sp,
-
-                            )
-
-
-
-                        Button(
-                            onClick = {
-                                val callIntent= Intent(Intent.ACTION_DIAL)
-                                callIntent.data="tel:0720245837".toUri()
-                                mContext.startActivity(callIntent)
-                            },
-                            colors = ButtonDefaults.buttonColors(Cyan),
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp),
-                        ) {
-                            Text(
-                                text = "Call us",
-                                fontSize = 15.sp,
-                            )
-                        }
-
-                    }
-
-                }
-                //End of Row
+                    textAlign = TextAlign.Center
+                )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
+                Text(
+                    text = "Meet Our Featured Cats Looking for Their Furever Homes",
+                    fontSize = 20.sp,
+                    textAlign = TextAlign.Center,
+                    fontFamily = FontFamily.Cursive,
+                    color = Color(0xFF8B5E83),
+                )
 
+                Spacer(modifier = Modifier.height(20.dp))
 
-                //Row-2
-                Row(modifier = Modifier
-                    .padding(start = 20.dp, end = 20.dp)
-                ) {
+                // Search Bar
+                var search by remember { mutableStateOf("") }
+                OutlinedTextField(
+                    value = search,
+                    onValueChange = { search = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 20.dp),
+                    leadingIcon = { Icon(painter = painterResource(R.drawable.pets), contentDescription = "") },
+                    placeholder = { Text(text = "Search for a kitty...") },
+                    shape = RoundedCornerShape(12.dp)
+                )
 
-                    Image(
-                        painter = painterResource(R.drawable.img_19),
-                        contentDescription = "",
-                        modifier = Modifier.width(200.dp).height(200.dp).clip(shape = RoundedCornerShape(10.dp)),
-                        contentScale = ContentScale.FillWidth,
-                    )
-                    Spacer(modifier = Modifier.width(20.dp))
+                Spacer(modifier = Modifier.height(20.dp))
 
-                    Column {
-                        Text(
-                            text = "Nonchalance",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                        )
-                        Spacer(modifier = Modifier.height(20.dp))
-
-                        Text(
-                            text = "Levi commands attention with stoic precision — humanity’s strongest soldier, his sharp gaze and flawless form embody elite strength, discipline, and the ultimate standard in unstoppable cool." ,
-                            fontSize = 10.sp,
-
-                            )
-
-
-
-                        Button(
-                            onClick = {
-                                val callIntent= Intent(Intent.ACTION_DIAL)
-                                callIntent.data="tel:0117434950".toUri()
-                                mContext.startActivity(callIntent)
-                            },
-                            colors = ButtonDefaults.buttonColors(Cyan),
-                            shape = RoundedCornerShape(10.dp),
-                            modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp),
-                        ) {
-                            Text(
-                                text = "Call us",
-                                fontSize = 15.sp,
-                            )
-                        }
-
-                    }
-
-                }
-                //End of Row-2
-
-
-                //Row-2
+                // Featured Cats Row
                 Row(
                     modifier = Modifier
                         .padding(start = 20.dp, end = 20.dp)
-
+                        .fillMaxWidth()
                 ) {
-
                     Image(
-                        painter = painterResource(R.drawable.img_17),
-                        contentDescription = "",
-                        modifier = Modifier.width(200.dp).height(200.dp).clip(shape = RoundedCornerShape(10.dp)),
-                        contentScale = ContentScale.FillWidth,
+                        painter = painterResource(R.drawable.img_17), // Replace with Hello Kitty-themed image
+                        contentDescription = "Featured Cat 1",
+                        modifier = Modifier
+                            .width(120.dp)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(10.dp)),
+                        contentScale = ContentScale.FillWidth
                     )
+
                     Spacer(modifier = Modifier.width(20.dp))
 
                     Column {
                         Text(
-                            text = "Brooding",
-                            fontSize = 20.sp,
+                            text = "Fluffy",
+                            fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
+                            color = Color(0xFF8B5E83)
                         )
-                        Spacer(modifier = Modifier.height(20.dp))
+
+                        Spacer(modifier = Modifier.height(10.dp))
 
                         Text(
-                            text = " Henry Cavill’s Witcher is all grit, intensity, and quiet power, with a stare that cuts deeper than his silver sword.",
-                            fontSize = 10.sp,
+                            text = "Fluffy is looking for a forever home! She's sweet, playful, and loves attention. Adopt her today and make your home complete.",
+                            fontSize = 12.sp,
+                            color = Color.Black
+                        )
 
-                            )
-
-
+                        Spacer(modifier = Modifier.height(10.dp))
 
                         Button(
                             onClick = {
-                                val callIntent= Intent(Intent.ACTION_DIAL)
-                                callIntent.data="tel:0117434950".toUri()
+                                val callIntent = Intent(Intent.ACTION_DIAL)
+                                callIntent.data = "tel:0720245837".toUri()
                                 mContext.startActivity(callIntent)
+
                             },
-                            colors = ButtonDefaults.buttonColors(Cyan),
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF4BBA7)),
                             shape = RoundedCornerShape(10.dp),
                             modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp),
                         ) {
                             Text(
-                                text = "Call us",
+                                text = "Call to Adopt",
                                 fontSize = 15.sp,
+                                color = Color.Black
                             )
                         }
-
                     }
-
                 }
-                //End of Row-2
 
+                Spacer(modifier = Modifier.height(20.dp))
 
+                // Another Featured Cat Row
+                Row(
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp)
+                        .fillMaxWidth()
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.img_18), // Replace with Hello Kitty-themed image
+                        contentDescription = "Featured Cat 2",
+                        modifier = Modifier
+                            .width(120.dp)
+                            .height(120.dp)
+                            .clip(RoundedCornerShape(10.dp)),
+                        contentScale = ContentScale.FillWidth
+                    )
 
+                    Spacer(modifier = Modifier.width(20.dp))
 
+                    Column {
+                        Text(
+                            text = "Whiskers",
+                            fontSize = 18.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF8B5E83)
+                        )
 
+                        Spacer(modifier = Modifier.height(10.dp))
 
+                        Text(
+                            text = "Whiskers is a curious kitty who loves exploring! She’s ready for her new home and to share her adventures with you.",
+                            fontSize = 12.sp,
+                            color = Color.Black
+                        )
 
+                        Spacer(modifier = Modifier.height(10.dp))
 
+                        Button(
+                            onClick = {
+                                val callIntent = Intent(Intent.ACTION_DIAL)
+                                callIntent.data = "tel:0117434950".toUri()
+                                mContext.startActivity(callIntent)
 
+                            },
+                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF4BBA7)),
+                            shape = RoundedCornerShape(10.dp),
+                            modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp),
+                        ) {
+                            Text(
+                                text = "Call to Adopt",
+                                fontSize = 15.sp,
+                                color = Color.Black
+                            )
+                        }
+                    }
+                }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                Spacer(modifier = Modifier.height(20.dp))
 
             }
         }
     )
-
-    //End of scaffold
-
-
-
-
 }
+
+
+
 
 @Preview(showBackground = true)
 @Composable
 fun AboutScreenPreview(){
-    AboutScreen(navController= rememberNavController())
+    AboutScreen(rememberNavController())
+
 }
+

@@ -4,8 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
@@ -74,24 +76,7 @@ fun HomeScreen(navController: NavController) {
                         navController.navigate(ROUT_DASHBOARD)
                     }
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
-                    label = { Text("Favorites") },
-                    selected = selectedIndex == 1,
-                    onClick = {
-                        selectedIndex = 1
-                        // Handle Favorites Navigation
-                    }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Lock, contentDescription = "Profile") },
-                    label = { Text("Profile") },
-                    selected = selectedIndex == 2,
-                    onClick = {
-                        selectedIndex = 2
-                        // Handle Profile Navigation
-                    }
-                )
+
             }
         },
         content = { paddingValues ->
@@ -99,10 +84,14 @@ fun HomeScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(paddingValues)
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+
             ) {
+                var search by remember { mutableStateOf("") }
+
                 OutlinedTextField(
-                    value = "",
-                    onValueChange = {},
+                    value = search,
+                    onValueChange = {search = it},
                     label = { Text("Search cats...") },
                     modifier = Modifier
                         .fillMaxWidth()

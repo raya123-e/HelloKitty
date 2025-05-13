@@ -74,27 +74,11 @@ fun CatCareScreen(navController: NavController) {
                         navController.navigate(ROUT_DASHBOARD)
                     }
                 )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Favorite, contentDescription = "Favorites") },
-                    label = { Text("Favorites") },
-                    selected = selectedIndex == 1,
-                    onClick = { selectedIndex = 1 }
-                )
-                NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Profile") },
-                    label = { Text("Profile") },
-                    selected = selectedIndex == 2,
-                    onClick = { selectedIndex = 2 }
-                )
+
             }
         },
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { /* Add to cart? */ },
-                containerColor = Cyan
-            ) {
-                Icon(Icons.Default.ShoppingCart, contentDescription = "Add")
-            }
+
         },
         content = { paddingValues ->
             Box(
