@@ -51,12 +51,12 @@ fun PersianScreen(navController: NavController) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFFFFC6E2)
+                    containerColor = Cyan
                 )
             )
         },
         bottomBar = {
-            NavigationBar(containerColor = Color(0xFFFFC6E2)) {
+            NavigationBar(containerColor = Cyan) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home", tint = Color.Black) },
                     label = { Text("Home") },
@@ -87,7 +87,7 @@ fun PersianScreen(navController: NavController) {
                     contentDescription = "Persian Cat",
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(300.dp)
+                        .height(400.dp)
                         .clip(RoundedCornerShape(16.dp)),
                     contentScale = ContentScale.Crop
                 )
@@ -97,7 +97,7 @@ fun PersianScreen(navController: NavController) {
                 Card(
                     shape = RoundedCornerShape(topStart = 30.dp, topEnd = 30.dp),
                     colors = CardDefaults.cardColors(containerColor = Color.White),
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize().offset(y = -40.dp)
                 ) {
                     Column(
                         modifier = Modifier.padding(20.dp)
@@ -144,7 +144,7 @@ fun PersianScreen(navController: NavController) {
                         Button(
                             onClick = { navController.navigate(ROUT_PAYMENT) },
                             shape = RoundedCornerShape(50),
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFFD4EC)),
+                            colors = ButtonDefaults.buttonColors(containerColor =Cyan),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(60.dp)
@@ -172,7 +172,7 @@ fun PersianScreen(navController: NavController) {
 @Composable
 fun AttributeCard(label: String, value: String) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFE1F5FE)),
+        colors = CardDefaults.cardColors(containerColor = Cyan),
         shape = RoundedCornerShape(16.dp),
         modifier = Modifier
             .width(100.dp)
