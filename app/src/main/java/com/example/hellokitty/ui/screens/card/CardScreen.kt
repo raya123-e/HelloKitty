@@ -1,5 +1,7 @@
 package com.example.hellokitty.ui.screens.card
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -18,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -40,6 +43,7 @@ val SoftCream = Color(0xFFFFF8F4)
 @Composable
 fun CardScreen(navController: NavController, catName: String = "Princess Whiskers", catBreed: String = "Persian", catFee: String = "$60.00") {
     var selectedIndex by remember { mutableStateOf(0) }
+    val context= LocalContext.current
 
     Scaffold(
         topBar = {
@@ -84,31 +88,7 @@ fun CardScreen(navController: NavController, catName: String = "Princess Whisker
                 Text("You're Almost There! 🐱", fontSize = 26.sp, fontWeight = FontWeight.Bold, color = PinkPaw, fontFamily = FontFamily.Serif)
                 Text("Get ready to welcome your new best friend.", fontSize = 16.sp, color = Color.Gray, modifier = Modifier.padding(bottom = 16.dp))
 
-                Card(
-                    shape = RoundedCornerShape(20.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color.White),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 24.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.cat_placeholder),
-                            contentDescription = "Adopted Cat",
-                            modifier = Modifier.size(72.dp),
-                            contentScale = ContentScale.Crop
-                        )
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Column {
-                            Text("Adopting: $catName", fontWeight = FontWeight.Bold)
-                            Text("Breed: $catBreed", color = Color.Gray)
-                            Text("Adoption Fee: $catFee", color = Color.Gray)
-                        }
-                    }
-                }
+
 
                 var name by remember { mutableStateOf("") }
                 var cardNumber by remember { mutableStateOf("") }
@@ -132,7 +112,8 @@ fun CardScreen(navController: NavController, catName: String = "Princess Whisker
                             Switch(checked = saveCard, onCheckedChange = { saveCard = it }, colors = SwitchDefaults.colors(checkedThumbColor = PinkPaw))
                             Text("Save for future paw-chases 🐾", fontSize = 14.sp, modifier = Modifier.padding(start = 8.dp))
                         }
-                        Button(onClick = { /* Add payment logic */ }, colors = ButtonDefaults.buttonColors(containerColor = PinkPaw), shape = RoundedCornerShape(50.dp), modifier = Modifier.fillMaxWidth().padding(top = 24.dp)) {
+                        Button(onClick = { val uri = Uri.parse("geo:0,0?q=Hello+Kitty+HQ,+Nairobi")
+                            context.startActivity(Intent(Intent.ACTION_VIEW, uri)) }, colors = ButtonDefaults.buttonColors(containerColor = PinkPaw), shape = RoundedCornerShape(50.dp), modifier = Modifier.fillMaxWidth().padding(top = 24.dp)) {
                             Text("Confirm Adoption", fontSize = 18.sp, color = Color.White)
                         }
                     }

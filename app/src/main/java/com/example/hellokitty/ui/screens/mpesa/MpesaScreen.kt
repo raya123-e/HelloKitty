@@ -1,6 +1,7 @@
 package com.example.hellokitty.ui.screens.mpesa
 
 import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -36,6 +37,7 @@ import com.example.hellokitty.ui.theme.Cyan
 fun MpesaScreen(navController: NavController) {
     var selectedIndex by remember { mutableStateOf(0) }
     val mContext = LocalContext.current
+    val context= LocalContext.current
 
     Scaffold(
         topBar = {
@@ -144,7 +146,9 @@ fun MpesaScreen(navController: NavController) {
 
                 Button(
                     onClick = {
-                        navController.navigate(ROUT_DASHBOARD)
+
+                        val uri = Uri.parse("geo:0,0?q=Hello+Kitty+HQ,+Nairobi")
+                        context.startActivity(Intent(Intent.ACTION_VIEW, uri))
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFFF8A65)),
                     shape = RoundedCornerShape(32.dp),
