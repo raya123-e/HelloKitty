@@ -193,9 +193,9 @@ fun RagamuffinScreen(navController: NavController) {
                     confirmButton = {
                         TextButton(onClick = {
                             showAdoptDialog = false
+                            navController.navigate(ROUT_PAYMENT)
                         }) {
                             Text("Confirm")
-                            navController.navigate(ROUT_PAYMENT)
                         }
                     },
                     dismissButton = {
